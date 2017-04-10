@@ -19,8 +19,9 @@ public class Principal {
         Passageiro passageiro = new Passageiro();
         passageiro.setNome(JOptionPane.showInputDialog("Cadastro Passageiro\nNome:"));
         passageiro.setCpf(JOptionPane.showInputDialog("Cadastro Passageiro\nCPF:"));
-        passageiro.setDataNascimento(JOptionPane.showInputDialog("Cadastro Passageiro\nData de Nascimento:"));
-        passageiro.setEmail(JOptionPane.showInputDialog("Cadastro Passageiro\nEmail:"));
+		String aux = JOptionPane.showInputDialog("Cadastro Passageiro\nData de Nascimento:");
+		passageiro.setDataNascimento(Aeroporto.StringToDate(aux));
+		passageiro.setEmail(JOptionPane.showInputDialog("Cadastro Passageiro\nEmail:"));
         passageiro.setTelefone(JOptionPane.showInputDialog("Cadastro Passageiro\nTelefone:"));
         passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Passageiro\nNúmero do Voo:")));
         Aeroporto.cadastrarPassageiros(passageiro);
