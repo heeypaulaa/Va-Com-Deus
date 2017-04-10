@@ -21,6 +21,11 @@ public class Aviao {
         this.id = id;
     }
 
+    public Aviao() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
+
     @Override
     public String toString() {
         return "Aviao [autonomia=" + autonomia + ", altura=" + altura + ", tamanhoEnvergaduraAsa="
