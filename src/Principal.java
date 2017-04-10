@@ -34,7 +34,6 @@ public class Principal {
         passageiro.setEmail(email);
         passageiro.setTelefone(JOptionPane.showInputDialog("Cadastro Passageiro\nTelefone:"));
         passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Passageiro\nNúmero do Voo:")));
-
         Aeroporto.cadastrarPassageiros(passageiro);
     }
 
