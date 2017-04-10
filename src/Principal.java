@@ -13,7 +13,7 @@ public class Principal {
         Aeroporto.listarAvioes();
 
         if (Aeroporto.removeAviao(a1) == true) {
-            System.out.println("removeuuuuuuu");
+            System.out.println("removeu");
         }
         Aeroporto.listarAvioes();
         
