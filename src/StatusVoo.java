@@ -4,6 +4,7 @@ public enum StatusVoo {
 
     private final int status;
 
+
     StatusVoo(int valor) {
         status = valor;
     }

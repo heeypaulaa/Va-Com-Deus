@@ -8,6 +8,7 @@ public class Passageiro {
     private String cpf;
     private Date dataNascimento;
 
+
     public Passageiro(String nome, String telefone, String email, String cpf, Date dataNascimento) {
         this.nome = nome;
         this.telefone = telefone;
