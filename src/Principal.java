@@ -1,6 +1,5 @@
 import javax.swing.JOptionPane;
 
-// test
 public class Principal {
 
 	public static void main (String[] args){
