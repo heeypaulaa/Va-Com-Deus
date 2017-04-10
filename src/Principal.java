@@ -1,21 +1,23 @@
+import javax.swing.JOptionPane;
 
 public class Principal {
 
-    public static void main (String[] args){
-        Aviao a1 = new Aviao(0.0, 0.0, 0.0, 0.0, 0.0, 10, "Jatinho");
-        Aviao a2 = new Aviao(1.0, 1.0, 1.0, 0.0, 0.0, 10, "Jatinho");
+	public static void main (String[] args){
+		String opcao;
 
-        Aeroporto.cadastrarAviao(a1);
-        Aeroporto.cadastrarAviao(a2);
-        Aeroporto.listarAvioes();
-
-        Aeroporto.editaAviao(a1);
-        Aeroporto.listarAvioes();
-
-        if (Aeroporto.removeAviao(a1) == true) {
-            System.out.println("removeu");
-        }
-        Aeroporto.listarAvioes();
-        
-    }
+		do {
+			opcao = JOptionPane.showInputDialog("1 - Cadastrar Avião\n2 - Editar Avião\n3 - Excluir Avião\n"
+					+ "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Excluir Passageiro\n"
+                    + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Excluir Voo\n10 - ");
+            if (opcao != null) {
+				if (opcao.equals("1")) {
+					// addAluno (lista);
+				} else if (opcao.equals("2")) {
+					// buscar(lista);
+				} else if (opcao.equals("3")) {
+					// imprimir(lista);
+				}
+			}
+		} while (opcao != null);
+	}
 }
