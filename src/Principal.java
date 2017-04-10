@@ -7,6 +7,11 @@ public class Principal {
         Aviao aviao = new Aviao();
         aviao.setId(JOptionPane.showInputDialog("ID:"));
         aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog("Altura:")));
+        aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog("Autonomia:")));
+        aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog("Comprimento:")));
+        aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog("Capacidade de Carga:")));
+        aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog("Capacidade Passageiros:")));
+
     }
 
     public static void main(String[] args) {
