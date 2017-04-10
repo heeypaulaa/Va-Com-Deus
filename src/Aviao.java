@@ -1,16 +1,16 @@
 
 public class Aviao {
 
-    private float autonomia;
-    private float altura;
-    private float tamanhoEnvergaduraAsa;
-    private float comprimento;
-    private float capacidadeCarga;
+    private Double autonomia;
+    private Double altura;
+    private Double tamanhoEnvergaduraAsa;
+    private Double comprimento;
+    private Double capacidadeCarga;
     private int capacidadePassageiros;
     private String id;
 
-    public Aviao(float autonomia, float altura, float tamanhoEnvergaduraAsa, float comprimento, float capacidadeCarga,
-                 int capacidadePassageiros, String id) {
+    public Aviao(Double autonomia, Double altura, Double tamanhoEnvergaduraAsa, Double comprimento,
+                 Double capacidadeCarga, int capacidadePassageiros, String id) {
         super();
         this.autonomia = autonomia;
         this.altura = altura;
@@ -21,43 +21,50 @@ public class Aviao {
         this.id = id;
     }
 
-    public float getAutonomia() {
+    @Override
+    public String toString() {
+        return "Aviao [autonomia=" + autonomia + ", altura=" + altura + ", tamanhoEnvergaduraAsa="
+                + tamanhoEnvergaduraAsa + ", comprimento=" + comprimento + ", capacidadeCarga=" + capacidadeCarga
+                + ", capacidadePassageiros=" + capacidadePassageiros + ", id=" + id + "]";
+    }
+
+    public Double getAutonomia() {
         return autonomia;
     }
 
-    public void setAutonomia(float autonomia) {
+    public void setAutonomia(Double autonomia) {
         this.autonomia = autonomia;
     }
 
-    public float getAltura() {
+    public Double getAltura() {
         return altura;
     }
 
-    public void setAltura(float altura) {
+    public void setAltura(Double altura) {
         this.altura = altura;
     }
 
-    public float getTamanhoEnvergaduraAsa() {
+    public Double getTamanhoEnvergaduraAsa() {
         return tamanhoEnvergaduraAsa;
     }
 
-    public void setTamanhoEnvergaduraAsa(float tamanhoEnvergaduraAsa) {
+    public void setTamanhoEnvergaduraAsa(Double tamanhoEnvergaduraAsa) {
         this.tamanhoEnvergaduraAsa = tamanhoEnvergaduraAsa;
     }
 
-    public float getComprimento() {
+    public Double getComprimento() {
         return comprimento;
     }
 
-    public void setComprimento(float comprimento) {
+    public void setComprimento(Double comprimento) {
         this.comprimento = comprimento;
     }
 
-    public float getCapacidadeCarga() {
+    public Double getCapacidadeCarga() {
         return capacidadeCarga;
     }
 
-    public void setCapacidadeCarga(float capacidadeCarga) {
+    public void setCapacidadeCarga(Double capacidadeCarga) {
         this.capacidadeCarga = capacidadeCarga;
     }
 

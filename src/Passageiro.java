@@ -7,14 +7,16 @@ public class Passageiro {
     private String email;
     private String cpf;
     private Date dataNascimento;
+    private int numeroVoo;
 
-
-    public Passageiro(String nome, String telefone, String email, String cpf, Date dataNascimento) {
+    public Passageiro(String nome, String telefone, String email, String cpf,
+                      Date dataNascimento, int numeroVoo) {
         this.nome = nome;
         this.telefone = telefone;
         this.email = email;
         this.cpf = cpf;
         this.dataNascimento = dataNascimento;
+        this.setNumeroVoo(numeroVoo);
     }
 
     public Passageiro() {
@@ -60,5 +62,20 @@ public class Passageiro {
     public void setDataNascimento(Date dataNascimento) {
         this.dataNascimento = dataNascimento;
     }
+
+    public int getNumeroVoo() {
+        return numeroVoo;
+    }
+
+    public void setNumeroVoo(int numeroVoo) {
+        this.numeroVoo = numeroVoo;
+    }
+
+    @Override
+    public String toString() {
+        return "Passageiro [nome=" + nome + ", telefone=" + telefone + ", email=" + email + ", cpf=" + cpf
+                + ", dataNascimento=" + dataNascimento + ", numeroVoo=" + numeroVoo + "]";
+    }
+
 
 }
