@@ -21,14 +21,14 @@ public class Aeroporto {
         return date;
     }
 
-    private static boolean validarCPF(String cpf) {
+    public static boolean validarCPF(String cpf) {
         if (cpf != null) {
             return cpf.matches("[0-9]{3}+[.]{1}+[0-9]{3}+[.]{1}+[0-9]{3}+[-]{1}+[0-9]{2}");
         }
         return false;
     }
 
-    private static boolean validarEmail(String email) {
+    public static boolean validarEmail(String email) {
         if (email != null) {
 
             //String nome = email.getNome();
