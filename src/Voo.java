@@ -10,6 +10,7 @@ public class Voo {
     private StatusVoo statusVoo;/*confimado, cancelado e atrasado*/
     private String destino;
     private String origem;
+    public String getNumeroVoo;
 
     public Voo() {
         super();

@@ -7,12 +7,12 @@ public class Principal {
     /*AVIÃO*/
     public static void menuCadastrarAviao() {
         Aviao aviao = new Aviao();
-        aviao.setId(JOptionPane.showInputDialog(null, "ID", "Cadastro Avião", JOptionPane.QUESTION_MESSAGE));
-        aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog(null, "Altura", "Cadastro Avião", JOptionPane.QUESTION_MESSAGE)));
-        aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog(null, "Autonomia", "Cadastro Avião", JOptionPane.QUESTION_MESSAGE)));
-        aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento", "Cadastro Avião", JOptionPane.QUESTION_MESSAGE)));
-        aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog(null, "Capacidade de Carga", "Cadastro Avião", JOptionPane.QUESTION_MESSAGE)));
-        aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Cadastro Avião", JOptionPane.QUESTION_MESSAGE)));
+        aviao.setId(JOptionPane.showInputDialog("Cadastro Avião\nID:"));
+        aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nAltura:")));
+        aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nAutonomia:")));
+        aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nComprimento:")));
+        aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nCapacidade de Carga:")));
+        aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Avião\nCapacidade Passageiros:")));
         if ((Aeroporto.cadastrarAviao(aviao)) == true) {
             JOptionPane.showMessageDialog(null, "Avião Cadastrado com sucesso", "Cadastro Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -39,8 +39,16 @@ public class Principal {
     /*VOO*/
     public static void menuCadastrarVoo() {
         Voo voo = new Voo();
-        voo.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE)));
-        voo.setidAviao(JOptionPane.showInputDialog(null, "ID do avião", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE)); //id do aviao
+        String numeroVoo;
+        do {
+            numeroVoo = JOptionPane.showInputDialog(null, "Número do Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+        } while (Aeroporto.existeIdVoo(numeroVoo));
+        voo.setNumeroVoo(Integer.parseInt(numeroVoo));
+        String idAviao;
+        do {
+            idAviao = JOptionPane.showInputDialog(null, "ID do avião", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+        } while (Aeroporto.existeIdAviao(numeroVoo));
+        voo.setidAviao(idAviao);
         voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
         String data = JOptionPane.showInputDialog(null, "Data", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
         voo.setData(Aeroporto.StringToDate(data));
@@ -92,7 +100,7 @@ public class Principal {
         if ((Aeroporto.removeVoo(voo)) == true) {
             JOptionPane.showMessageDialog(null, "Voo removido com sucesso", "Remover Voo", JOptionPane.INFORMATION_MESSAGE);
         } else {
-            JOptionPane.showMessageDialog(null, "Erro - Voo não removido", "Remover Voo", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Erro - Voo não removido, não existe", "Remover Voo", JOptionPane.ERROR_MESSAGE);
         }
     }
 
@@ -114,10 +122,9 @@ public class Principal {
             email = JOptionPane.showInputDialog(null, "Email:", "Cadastro Passageiro", 3);
         } while (Aeroporto.validarEmail(email) == false);
         passageiro.setEmail(email);
-        passageiro.setTelefone(JOptionPane.showInputDialog(null, "Telefone:", "Cadastro Passageiro",
-                3));
-        passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null,
-                "Número do Voo:", "Cadastro Passageiro", 3)));
+        passageiro.setTelefone(JOptionPane.showInputDialog("Cadastro Passageiro\nTelefone:"));
+        passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Passageiro\nNúmero do Voo:")));
+
         if ((Aeroporto.cadastrarPassageiros(passageiro)) == true) {
             JOptionPane.showMessageDialog(null, "Passageiro Cadastrado com sucesso", "Cadastro Passageiro", JOptionPane.INFORMATION_MESSAGE);
         } else {
