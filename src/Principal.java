@@ -1,6 +1,7 @@
 import sun.security.krb5.internal.crypto.dk.AesDkCrypto;
 
 import javax.swing.JOptionPane;
+import java.text.ParseException;
 
 public class Principal {
 
@@ -161,14 +162,14 @@ public class Principal {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws ParseException {
         int opcao;
         do {
             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
                     "1 - Cadastrar Avião\n2 - Editar Avião\n3 - Remover Avião\n"
                     + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
                     + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
-                            + "11 - Listar Voos por Data", "Vá Com Deus", 3));
+                            + "11 - Listar Voos por Data\n 12 - Listar Voos do dia", "Vá Com Deus", 3));
 
             switch (opcao) {
                 case 1://if (opcao.equals("1")) {
@@ -204,6 +205,10 @@ public class Principal {
                 case 11:
                     String data = JOptionPane.showInputDialog(null, "Digite a data que deseja");
                     Aeroporto.listarVoosData(Aeroporto.StringToDate(data));
+                    break;
+                case 12:
+                    Aeroporto.listarVoosData(Aeroporto.dataAtual());
+                    break;
                 default:
                     break;
             }

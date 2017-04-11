@@ -214,10 +214,13 @@ public class Aeroporto {
         return false;
     }
 
-    public static String dataAtual() {
+    public static Date dataAtual() throws ParseException {
         Date d = new Date();
         String dStr = java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d);
-        return dStr;
+        Date date = null;
+        DateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        date = (java.util.Date) formatter.parse(dStr);
+        return date;
     }
 
 }
