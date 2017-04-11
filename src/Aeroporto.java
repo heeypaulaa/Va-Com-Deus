@@ -106,9 +106,11 @@ public class Aeroporto {
 
     /*VOOS*/
     public static boolean cadastrarVoos(Voo voo) {
-        voos.add(voo);
-
-        return true;
+        if (voos.size() < 100) {
+            voos.add(voo);
+            return true;
+        }
+        return false;
 
     }
 

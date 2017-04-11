@@ -13,7 +13,11 @@ public class Principal {
         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nComprimento:")));
         aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nCapacidade de Carga:")));
         aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Avião\nCapacidade Passageiros:")));
-        Aeroporto.cadastrarAviao(aviao);
+        if ((Aeroporto.cadastrarAviao(aviao)) == true) {
+            JOptionPane.showMessageDialog(null, "Avião Cadastrado com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro - Avião não cadastrado");
+        }
     }
 
     public static void menuRemoverAviao() {
@@ -24,7 +28,12 @@ public class Principal {
         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog("Excluir Avião\nComprimento:")));
         aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog("Ecluir Avião\nCapacidade de Carga:")));
         aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog("Excluir Avião\nCapacidade Passageiros:")));
-        Aeroporto.removeAviao(aviao);
+        if ((Aeroporto.removeAviao(aviao)) == true) {
+            JOptionPane.showMessageDialog(null, "Avião removido com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro - Avião não removido");
+        }
+
     }
 
     /*VOO*/
@@ -41,7 +50,12 @@ public class Principal {
         voo.setDestino((JOptionPane.showInputDialog("Cadastro Voo\nDestino:")));
         //TRATAR ENUM
         //voo.setStatusVoo(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nCapacidade de Carga:")));
-        Aeroporto.cadastrarVoos(voo);
+
+        if ((Aeroporto.cadastrarVoos(voo)) == true) {
+            JOptionPane.showMessageDialog(null, "Voo Cadastrado com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro - Voo não cadastrado");
+        }
     }
 
     public static void menuRemoverVoo() {
@@ -57,7 +71,12 @@ public class Principal {
         voo.setDestino((JOptionPane.showInputDialog("Remover Voo\nDestino:")));
         //TRATAR ENUM
         //voo.setStatusVoo(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nCapacidade de Carga:")));
-        Aeroporto.removeVoo(voo);
+        if ((Aeroporto.removeVoo(voo)) == true) {
+            JOptionPane.showMessageDialog(null, "Voo removido com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro - Voo não removido");
+        }
+
     }
 
     /*PASSAGEIRO*/
@@ -78,7 +97,12 @@ public class Principal {
         passageiro.setEmail(email);
         passageiro.setTelefone(JOptionPane.showInputDialog("Cadastro Passageiro\nTelefone:"));
         passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Passageiro\nNúmero do Voo:")));
-        Aeroporto.cadastrarPassageiros(passageiro);
+
+        if ((Aeroporto.cadastrarPassageiros(passageiro)) == true) {
+            JOptionPane.showMessageDialog(null, "Passageiro Cadastrado com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro - Passageiro não cadastrado");
+        }
     }
 
     public static void menuRemoverPassageiro() {
@@ -99,7 +123,11 @@ public class Principal {
         passageiro.setEmail(email);
         passageiro.setTelefone(JOptionPane.showInputDialog("Remover Passageiro\nTelefone:"));
         passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog("Remover Passageiro\nNúmero do Voo:")));
-        Aeroporto.removePassageiro(passageiro);
+        if ((Aeroporto.removePassageiro(passageiro)) == true) {
+            JOptionPane.showMessageDialog(null, "Passageiro removido com sucesso");
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro - Passageiro não removido");
+        }
     }
 
     public static void main(String[] args) {
