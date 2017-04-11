@@ -214,5 +214,10 @@ public class Aeroporto {
         return false;
     }
 
+    public static String dataAtual() {
+        Date d = new Date();
+        String dStr = java.text.DateFormat.getDateInstance(DateFormat.MEDIUM).format(d);
+        return dStr;
+    }
 
 }
