@@ -4,7 +4,7 @@ public class Voo {
     /*estes dados são enviados via arquivo texto seguindo um padrao de dados em classe chamado Json*/
     private int numeroVoo;
     private String companhiaAerea;
-    private Aviao aviao;
+    private String idAviao;
     private Date data;
     private Date horarioVoo;
     private StatusVoo statusVoo;/*confimado, cancelado e atrasado*/
@@ -13,15 +13,16 @@ public class Voo {
 
 
     public Voo() {
+
         super();
     }
 
-    public Voo(int numeroVoo, String companhiaAerea, Aviao aviao, Date data, Date horarioVoo, StatusVoo statusVoo,
+    public Voo(int numeroVoo, String companhiaAerea, String idAviao, Date data, Date horarioVoo, StatusVoo statusVoo,
                String destino, String origem) {
         super();
         this.numeroVoo = numeroVoo;
         this.companhiaAerea = companhiaAerea;
-        this.aviao = aviao;
+        this.idAviao = idAviao;
         this.data = data;
         this.horarioVoo = horarioVoo;
         this.statusVoo = statusVoo;
@@ -45,12 +46,12 @@ public class Voo {
         this.companhiaAerea = companhiaAerea;
     }
 
-    public Aviao getAviao() {
-        return aviao;
+    public String getidAviao() {
+        return idAviao;
     }
 
-    public void setAviao(Aviao aviao) {
-        this.aviao = aviao;
+    public void setidAviao(String idAviao) {
+        this.idAviao = idAviao;
     }
 
     public Date getData() {
@@ -95,7 +96,7 @@ public class Voo {
 
     @Override
     public String toString() {
-        return "Voo [numeroVoo=" + numeroVoo + ", companhiaAerea=" + companhiaAerea + ", aviao=" + aviao + ", data="
+        return "Voo [numeroVoo=" + numeroVoo + ", companhiaAerea=" + companhiaAerea + ", idAviao=" + idAviao + ", data="
                 + data + ", horarioVoo=" + horarioVoo + ", statusVoo=" + statusVoo + ", destino=" + destino
                 + ", origem=" + origem + "]";
     }
