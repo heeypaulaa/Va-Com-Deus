@@ -140,24 +140,36 @@ public class Principal {
             switch (opcao) {
                 case 1://if (opcao.equals("1")) {
                     menuCadastrarAviao();
+                    break;
                 case 2://} else if (opcao.equals("2")) {
                     // buscar(lista);
+                    break;
                 case 3://} else if (opcao.equals("3")) {
                     menuRemoverAviao();
+                    break;
                 case 4://} else if (opcao.equals("4")) {
                     menuCadastrarPassageiro();
+                    break;
                 case 5://} else if (opcao.equals("5")) {
                     // imprimir(lista);
+                    break;
                 case 6://} else if (opcao.equals("6")) {
                     menuRemoverPassageiro();
+                    break;
                 case 7://} else if (opcao.equals("7")) {
                     menuCadastrarVoo();
+                    break;
                 case 8://} else if (opcao.equals("8")) {
                     // imprimir(lista);
+                    break;
                 case 9://} else if (opcao.equals("9")) {
                     menuRemoverVoo();
+                    break;
                 case 10:
                     Aeroporto.listarVoo();
+                    break;
+                default:
+                    break;
             }
 
 
