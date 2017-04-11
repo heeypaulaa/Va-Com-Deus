@@ -11,9 +11,7 @@ public class Voo {
     private String destino;
     private String origem;
 
-
     public Voo() {
-
         super();
     }
 
