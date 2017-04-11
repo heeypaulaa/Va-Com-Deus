@@ -131,33 +131,36 @@ public class Principal {
     }
 
     public static void main(String[] args) {
-        String opcao;
+        int opcao;
         do {
-            opcao = JOptionPane.showInputDialog("1 - Cadastrar Avião\n2 - Editar Avião\n3 - Remover Avião\n"
+            opcao = Integer.parseInt(JOptionPane.showInputDialog("1 - Cadastrar Avião\n2 - Editar Avião\n3 - Remover Avião\n"
                     + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
-                    + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 ");
-            if (opcao != null) {
-                if (opcao.equals("1")) {
+                    + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 "));
+
+            switch (opcao) {
+                case 1://if (opcao.equals("1")) {
                     menuCadastrarAviao();
-                } else if (opcao.equals("2")) {
+                case 2://} else if (opcao.equals("2")) {
                     // buscar(lista);
-                } else if (opcao.equals("3")) {
+                case 3://} else if (opcao.equals("3")) {
                     menuRemoverAviao();
-                } else if (opcao.equals("4")) {
+                case 4://} else if (opcao.equals("4")) {
                     menuCadastrarPassageiro();
-                } else if (opcao.equals("5")) {
+                case 5://} else if (opcao.equals("5")) {
                     // imprimir(lista);
-                } else if (opcao.equals("6")) {
+                case 6://} else if (opcao.equals("6")) {
                     menuRemoverPassageiro();
-                } else if (opcao.equals("7")) {
+                case 7://} else if (opcao.equals("7")) {
                     menuCadastrarVoo();
-                } else if (opcao.equals("8")) {
+                case 8://} else if (opcao.equals("8")) {
                     // imprimir(lista);
-                } else if (opcao.equals("9")) {
+                case 9://} else if (opcao.equals("9")) {
                     menuRemoverVoo();
-                }
+                case 10:
+                    Aeroporto.listarVoo();
             }
 
-        } while (opcao != null);
+
+        } while (opcao <= 10);
     }
 }
