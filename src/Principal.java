@@ -7,12 +7,12 @@ public class Principal {
     /*AVIÃO*/
     public static void menuCadastrarAviao() {
         Aviao aviao = new Aviao();
-        aviao.setId(JOptionPane.showInputDialog("Cadastro Avião\nID:"));
-        aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nAltura:")));
-        aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nAutonomia:")));
-        aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nComprimento:")));
-        aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog("Cadastro Avião\nCapacidade de Carga:")));
-        aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Avião\nCapacidade Passageiros:")));
+        aviao.setId(JOptionPane.showInputDialog(null, "ID", "Cadastro Avião", 3));
+        aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog(null, "Altura", "Cadastro Avião", 3)));
+        aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog(null, "Autonomia", "Cadastro Avião", 3)));
+        aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento", "Cadastro Avião", 3)));
+        aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog(null, "Capacidade de Carga", "Cadastro Avião", 3)));
+        aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Cadastro Avião", 3)));
         if ((Aeroporto.cadastrarAviao(aviao)) == true) {
             JOptionPane.showMessageDialog(null, "Avião Cadastrado com sucesso", "Cadastro Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
