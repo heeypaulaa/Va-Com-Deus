@@ -109,6 +109,7 @@ public class Principal {
         }
     }
 
+
     /*PASSAGEIRO*/
     public static void menuCadastrarPassageiro() {
         Passageiro passageiro = new Passageiro();
@@ -169,7 +170,8 @@ public class Principal {
                     "1 - Cadastrar Avião\n2 - Editar Avião\n3 - Remover Avião\n"
                     + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
                     + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
-                            + "11 - Listar Voos por Data\n 12 - Listar Voos do dia", "Vá Com Deus", 3));
+                            + "11 - Listar Voos por Data\n 12 - Listar Voos do dia\n 13 - Listar Voos do Passageiro" +
+                            "\n 14 - Listar os passageiros de um voo de acordo com o número do voo", "Vá Com Deus", 3));
 
             switch (opcao) {
                 case 1://if (opcao.equals("1")) {
@@ -208,6 +210,12 @@ public class Principal {
                     break;
                 case 12:
                     Aeroporto.listarVoosData(Aeroporto.dataAtual());
+                    break;
+                case 13:
+                    //menuListarVoosPassageiro();
+                    break;
+                case 14: //Listar os passageiros de um voo de acordo com o número do voo
+
                     break;
                 default:
                     break;

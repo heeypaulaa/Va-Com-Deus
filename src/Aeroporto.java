@@ -169,6 +169,26 @@ public class Aeroporto {
         JOptionPane.showMessageDialog(null, result);
     }
 
+    public static void listarVoosPassageiro(Passageiro passageiro) {
+        String result = "";
+        for (Passageiro p : passageiros) {
+            if (p.equals(passageiro)) {
+                result = result + voos.toString() + "\n";
+            }
+        }
+        JOptionPane.showMessageDialog(null, result);
+    }
+
+    public static void listarPassageirosVoo(Voo voo) {
+        String result = "";
+        for (Voo v : voos) {
+            if (v.equals(voo)) {
+                result = result + passageiros.toString() + "\n";
+            }
+        }
+        JOptionPane.showMessageDialog(null, result);
+    }
+
     public static boolean existeIdAviao(String id) {
         for (Aviao a : avioes) {
             if (a.getId().equals(id)) {
