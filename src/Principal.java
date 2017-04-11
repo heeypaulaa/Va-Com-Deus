@@ -190,8 +190,6 @@ public class Principal {
                 default:
                     break;
             }
-
-
         } while (opcao <= 10);
     }
 }
