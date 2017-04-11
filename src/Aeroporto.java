@@ -44,10 +44,13 @@ public class Aeroporto {
 	/*AVIÃO*/
 
     public static boolean cadastrarAviao(Aviao aviao) {
+        if (aviao.getAltura().equals(null) || aviao.getId().equals(null) || aviao.getAutonomia().equals(null) ||
+                aviao.getCapacidadeCarga().equals(null) || (aviao.getCapacidadePassageiros() < 1) ||
+                aviao.getComprimento().equals(null) || aviao.getTamanhoEnvergaduraAsa().equals(null)) {
+            return false;
+        }
         avioes.add(aviao);
-
         return true;
-
     }
 
     public static boolean editaAviao(Aviao aviao) {
@@ -63,6 +66,9 @@ public class Aeroporto {
     }
 
     public static boolean removeAviao(Aviao aviao) {
+        if (existeAviao(aviao) == false) {
+            return false;
+        }
         avioes.remove(aviao);
         return true;
     }
@@ -76,10 +82,12 @@ public class Aeroporto {
 
     /*PASSAGEIROS*/
     public static boolean cadastrarPassageiros(Passageiro passageiro) {
+        if (passageiro.getCpf().equals(null) || passageiro.getDataNascimento().equals(null) || passageiro.getEmail().equals(null) ||
+                passageiro.getNome().equals(null) || (passageiro.getNumeroVoo() > 0) || passageiro.getTelefone().equals(null)) {
+            return false;
+        }
         passageiros.add(passageiro);
-
         return true;
-
     }
 
     public static boolean editaPassageiro(Passageiro passageiro) {
@@ -95,6 +103,9 @@ public class Aeroporto {
     }
 
     public static boolean removePassageiro(Passageiro passageiro) {
+        if ((existePassageiro(passageiro)) == false) {
+            return false;
+        }
         passageiros.remove(passageiro);
         return true;
     }
@@ -107,9 +118,13 @@ public class Aeroporto {
 
     /*VOOS*/
     public static boolean cadastrarVoos(Voo voo) {
-        if (voos.size() < 100) {
-            voos.add(voo);
-            return true;
+        if ((voo.getNumeroVoo() > 0) || voo.getCompanhiaAerea().equals(null) || voo.getData().equals(null) ||
+                voo.getDestino().equals(null) || voo.getOrigem().equals(null) || voo.getHorarioVoo().equals(null) ||
+                voo.getidAviao().equals(null) || voo.getStatusVoo().equals(null)) {
+            if (voos.size() < 100) {
+                voos.add(voo);
+                return true;
+            }
         }
         return false;
     }
@@ -175,6 +190,24 @@ public class Aeroporto {
     public static boolean existeVoo(Voo voo) {
         for (Voo v : voos) {
             if (v.equals(voo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean existeAviao(Aviao aviao) {
+        for (Aviao a : avioes) {
+            if (a.equals(aviao)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean existePassageiro(Passageiro passageiro) {
+        for (Passageiro p : passageiros) {
+            if (p.equals(passageiro)) {
                 return true;
             }
         }
