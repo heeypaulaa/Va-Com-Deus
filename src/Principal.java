@@ -95,7 +95,6 @@ public class Principal {
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Voo não removido");
         }
-
     }
 
     /*PASSAGEIRO*/
@@ -154,7 +153,8 @@ public class Principal {
         do {
             opcao = Integer.parseInt(JOptionPane.showInputDialog("1 - Cadastrar Avião\n2 - Editar Avião\n3 - Remover Avião\n"
                     + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
-                    + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 "));
+                    + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
+                    + "11 - Listar Voos por Data"));
 
             switch (opcao) {
                 case 1://if (opcao.equals("1")) {
@@ -185,8 +185,11 @@ public class Principal {
                     menuRemoverVoo();
                     break;
                 case 10:
-                    Aeroporto.listarVoo();
+                    Aeroporto.listarVoos();
                     break;
+                case 11:
+                    String data = JOptionPane.showInputDialog(null, "Digite a data que deseja");
+                    Aeroporto.listarVoosData(Aeroporto.StringToDate(data));
                 default:
                     break;
             }

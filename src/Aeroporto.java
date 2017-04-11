@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -131,12 +132,22 @@ public class Aeroporto {
         return true;
     }
 
-    public static boolean listarVoo() {
+    public static void listarVoos() {
+        String result = "";
         for (Voo v : voos) {
-            System.out.println(v.toString());
-            return true;
+            result = result + v.toString() + "\n";
         }
-        return false;
+        JOptionPane.showMessageDialog(null, result);
+    }
+
+    public static void listarVoosData(Date data) {
+        String result = "";
+        for (Voo v : voos) {
+            if (v.getData().equals(data)) {
+                result = result + v.toString() + "\n";
+            }
+        }
+        JOptionPane.showMessageDialog(null, result);
     }
 
 }
