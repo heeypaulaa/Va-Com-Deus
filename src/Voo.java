@@ -96,9 +96,9 @@ public class Voo {
 
     @Override
     public String toString() {
-        return "Número do Voo: " + numeroVoo + "\t Companhia Aérea: " + companhiaAerea + "\t Avião: " + idAviao +
-                "\t Data: " + data + "\t Horário do Voo=" + horarioVoo + "\t Status Voo: " + statusVoo + "\t Destino: " + destino
-                + "\t Origem: " + origem;
+        return "Número do Voo: " + numeroVoo + "\tCompanhia Aérea: " + companhiaAerea + "\tAvião: " + idAviao
+                + "\tData: " + data + "\tHorário do Voo=" + horarioVoo + "\tStatus Voo: " + statusVoo + "\tDestino: "
+                + destino + "\tOrigem: " + origem;
     }
 
 }
