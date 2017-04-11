@@ -111,7 +111,6 @@ public class Aeroporto {
             return true;
         }
         return false;
-
     }
 
     public static boolean editaVoo(Voo voo) {
@@ -132,10 +131,12 @@ public class Aeroporto {
         return true;
     }
 
-    public static void listarVoo() {
+    public static boolean listarVoo() {
         for (Voo v : voos) {
             System.out.println(v.toString());
+            return true;
         }
+        return false;
     }
 
 }
