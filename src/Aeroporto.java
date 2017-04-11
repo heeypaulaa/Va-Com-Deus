@@ -128,8 +128,12 @@ public class Aeroporto {
     }
 
     public static boolean removeVoo(Voo voo) {
-        voos.remove(voo);
-        return true;
+        if ((existeVoo(voo)) == true) {
+            voos.remove(voo);
+            return true;
+        }
+        return false;
+
     }
 
     public static void listarVoos() {
@@ -149,5 +153,33 @@ public class Aeroporto {
         }
         JOptionPane.showMessageDialog(null, result);
     }
+
+    public static boolean existeIdAviao(String id) {
+        for (Aviao a : avioes) {
+            if (a.getId().equals(id)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean existeIdVoo(String id) {
+        for (Voo v : voos) {
+            if (v.getNumeroVoo == id) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean existeVoo(Voo voo) {
+        for (Voo v : voos) {
+            if (v.equals(voo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 
 }
