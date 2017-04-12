@@ -44,9 +44,9 @@ public class Aeroporto {
 	/*AVIÃO*/
 
     public static boolean cadastrarAviao(Aviao aviao) {
-        if (aviao.getAltura().equals(null) || aviao.getId().equals(null) || aviao.getAutonomia().equals(null) ||
-                aviao.getCapacidadeCarga().equals(null) || (aviao.getCapacidadePassageiros() < 1) ||
-                aviao.getComprimento().equals(null) || aviao.getTamanhoEnvergaduraAsa().equals(null)) {
+        if ((aviao.getAltura() < 1) || (aviao.getId().equals(null)) || (aviao.getAutonomia() < 1) ||
+                (aviao.getCapacidadeCarga() < 1) || (aviao.getCapacidadePassageiros() < 1) ||
+                (aviao.getComprimento() < 1) || (aviao.getTamanhoEnvergaduraAsa() < 1)) {
             return false;
         }
         avioes.add(aviao);
@@ -198,9 +198,9 @@ public class Aeroporto {
         return false;
     }
 
-    public static boolean existeIdVoo(String id) {
+    public static boolean existeIdVoo(int id) {
         for (Voo v : voos) {
-            if (v.getNumeroVoo == id) {
+            if (v.getNumeroVoo() == (id)) {
                 return true;
             }
         }

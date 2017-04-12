@@ -1,3 +1,4 @@
+import com.sun.xml.internal.bind.v2.runtime.SchemaTypeTransducer;
 import sun.security.krb5.internal.crypto.dk.AesDkCrypto;
 
 import javax.swing.JOptionPane;
@@ -18,6 +19,9 @@ public class Principal {
         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento em metros", "Cadastro Avião", 3)));
         aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog(null, "Capacidade de Carga em toneladas", "Cadastro Avião", 3)));
         aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Cadastro Avião", 3)));
+        aviao.setTamanhoEnvergaduraAsa(Double.parseDouble(JOptionPane.showInputDialog(null, "Tamanho envergadura Asas", "Cadastro Avião", 3)));
+        // ;
+        System.out.println(aviao.toString());
         if ((Aeroporto.cadastrarAviao(aviao)) == true) {
             JOptionPane.showMessageDialog(null, "Avião Cadastrado com sucesso", "Cadastro Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -44,15 +48,15 @@ public class Principal {
     /*VOO*/
     public static void menuCadastrarVoo() {
         Voo voo = new Voo();
-        String numeroVoo;
+        int numeroVoo;
         do {
-            numeroVoo = JOptionPane.showInputDialog(null, "Número do Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+            numeroVoo = Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
         } while (Aeroporto.existeIdVoo(numeroVoo));
-        voo.setNumeroVoo(Integer.parseInt(numeroVoo));
+        voo.setNumeroVoo(numeroVoo);
         String idAviao;
         do {
             idAviao = JOptionPane.showInputDialog(null, "ID do avião", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
-        } while (Aeroporto.existeIdAviao(numeroVoo));
+        } while (!Aeroporto.existeIdAviao(idAviao));
         voo.setidAviao(idAviao);
         voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
         String data = JOptionPane.showInputDialog(null, "Data", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
@@ -129,8 +133,11 @@ public class Principal {
         } while (Aeroporto.validarEmail(email) == false);
         passageiro.setEmail(email);
         passageiro.setTelefone(JOptionPane.showInputDialog("Cadastro Passageiro\nTelefone:"));
-        passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Passageiro\nNúmero do Voo:")));
-
+        int numeroVoo;
+        do {
+            numeroVoo = Integer.parseInt(JOptionPane.showInputDialog("Cadastro Passageiro\nNúmero do Voo:"));
+        } while (!Aeroporto.existeIdVoo(numeroVoo));
+        passageiro.setNumeroVoo(numeroVoo);
         if ((Aeroporto.cadastrarPassageiros(passageiro)) == true) {
             JOptionPane.showMessageDialog(null, "Passageiro Cadastrado com sucesso", "Cadastro Passageiro", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -168,10 +175,11 @@ public class Principal {
         do {
             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
                     "1 - Cadastrar Avião\n2 - Editar Avião\n3 - Remover Avião\n"
-                    + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
-                    + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
-                            + "11 - Listar Voos por Data\n 12 - Listar Voos do dia\n 13 - Listar Voos do Passageiro" +
-                            "\n 14 - Listar os passageiros de um voo de acordo com o número do voo", "Vá Com Deus", 3));
+                            + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
+                            + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
+                            + "11 - Listar Voos por Data\n12 - Listar Voos do dia\n13 - Listar Voos do Passageiro" +
+                            "\n14 - Listar os passageiros de um voo de acordo com o número do voo\n15 - Listar todos os Voos\n" +
+                            "16 - Listar todos os aviões\n17 - Listar todos os passageiros", "Vá Com Deus", 3));
 
             switch (opcao) {
                 case 1://if (opcao.equals("1")) {
@@ -216,6 +224,15 @@ public class Principal {
                     break;
                 case 14: //Listar os passageiros de um voo de acordo com o número do voo
 
+                    break;
+                case 15:
+                    Aeroporto.listarVoos();
+                    break;
+                case 16:
+                    Aeroporto.listarAvioes();
+                    break;
+                case 17:
+                    Aeroporto.listarPassageiros();
                     break;
                 default:
                     break;

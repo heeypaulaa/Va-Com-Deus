@@ -28,9 +28,11 @@ public class Aviao {
 
     @Override
     public String toString() {
-        return "Aviao [autonomia=" + autonomia + ", altura=" + altura + ", tamanhoEnvergaduraAsa="
-                + tamanhoEnvergaduraAsa + ", comprimento=" + comprimento + ", capacidadeCarga=" + capacidadeCarga
-                + ", capacidadePassageiros=" + capacidadePassageiros + ", id=" + id + "]";
+        System.out.print(99);
+        return "Autonomia: " + autonomia + ", altura:" + altura + ", Tamanho Envergadura da Asa:"
+                + tamanhoEnvergaduraAsa + ", comprimento:" + comprimento + ", Capacidade  de Carga:" + capacidadeCarga
+                + ", Capacidade Passageiros: " + capacidadePassageiros + ", id:" + id;
+
     }
 
     public Double getAutonomia() {
