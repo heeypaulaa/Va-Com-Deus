@@ -1,3 +1,7 @@
+package vacomdeus.dao;
+
+import vacomdeus.modelo.Aviao;
+
 import javax.swing.*;
 import java.text.DateFormat;
 import java.text.ParseException;

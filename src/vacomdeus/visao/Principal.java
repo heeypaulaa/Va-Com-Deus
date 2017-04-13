@@ -1,5 +1,7 @@
-import com.sun.xml.internal.bind.v2.runtime.SchemaTypeTransducer;
-import sun.security.krb5.internal.crypto.dk.AesDkCrypto;
+package vacomdeus.visao;
+
+import vacomdeus.modelo.Aviao;
+import vacomdeus.modelo.StatusVoo;
 
 import javax.swing.JOptionPane;
 import java.text.ParseException;
