@@ -1,7 +1,7 @@
 package vacomdeus.visao;
 
-import vacomdeus.modelo.Aviao;
-import vacomdeus.modelo.StatusVoo;
+import vacomdeus.modelo.*;
+import vacomdeus.dao.Aeroporto;
 
 import javax.swing.JOptionPane;
 import java.text.ParseException;

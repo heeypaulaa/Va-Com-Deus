@@ -1,6 +1,6 @@
 package vacomdeus.dao;
 
-import vacomdeus.modelo.Aviao;
+import vacomdeus.modelo.*;
 
 import javax.swing.*;
 import java.text.DateFormat;
