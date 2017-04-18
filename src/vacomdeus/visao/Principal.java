@@ -19,7 +19,6 @@ public class Principal {
         aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog(null, "Altura em metros", "Cadastro Avião", 3)));
         aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog(null, "Autonomia em km", "Cadastro Avião", 3)));
         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento em metros", "Cadastro Avião", 3)));
-        aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog(null, "Capacidade de Carga em toneladas", "Cadastro Avião", 3)));
         aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Cadastro Avião", 3)));
         aviao.setTamanhoEnvergaduraAsa(Double.parseDouble(JOptionPane.showInputDialog(null, "Tamanho envergadura Asas", "Cadastro Avião", 3)));
         // ;
@@ -37,7 +36,6 @@ public class Principal {
         aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog(null, "Altura", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
         aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog(null, "Autonomia", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
-        aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog(null, "Capacidade de Carga", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
         aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
         if ((Aeroporto.removeAviao(aviao)) == true) {
             JOptionPane.showMessageDialog(null, "Avião removido com sucesso", "Excluir Avião", JOptionPane.INFORMATION_MESSAGE);

@@ -48,8 +48,8 @@ public class Aeroporto {
 	/*AVIÃO*/
     public static boolean cadastrarAviao(Aviao aviao) {
         if ((aviao.getAltura() < 1) || (aviao.getId().equals(null)) || (aviao.getAutonomia() < 1) ||
-                (aviao.getCapacidadeCarga() < 1) || (aviao.getCapacidadePassageiros() < 1) ||
-                (aviao.getComprimento() < 1) || (aviao.getTamanhoEnvergaduraAsa() < 1)) {
+                (aviao.getCapacidadePassageiros() < 1) || (aviao.getComprimento() < 1) ||
+                (aviao.getTamanhoEnvergaduraAsa() < 1)) {
             return false;
         }
         avioes.add(aviao);
@@ -162,7 +162,7 @@ public class Aeroporto {
                 result = result + v.toString() + "\n";
             }
         }
-        JOptionPane.showMessageDialog(null, result);
+        JOptionPane.showMessageDialog(null, result, "Voos Cadastrados", JOptionPane.PLAIN_MESSAGE);
     }
 
 
@@ -178,7 +178,7 @@ public class Aeroporto {
         if (i == 0) {
             result = "Não tem nenhum Voo cadastrado nesta data";
         }
-        JOptionPane.showMessageDialog(null, result);
+        JOptionPane.showMessageDialog(null, result, "Voos Por Data", JOptionPane.PLAIN_MESSAGE);
     }
 
     public static void listarVoosPassageiro(Passageiro passageiro) {
@@ -188,10 +188,10 @@ public class Aeroporto {
                 result = result + voos.toString() + "\n";
             }
         }
-        JOptionPane.showMessageDialog(null, result);
+        JOptionPane.showMessageDialog(null, result, "Voos por Passageiros", JOptionPane.PLAIN_MESSAGE);
     }
 
-    public static void listarPassageirosV1oo(Voo voo) {
+    public static void listarPassageirosVoo(Voo voo) {
         String result = "";
         if (existeIdVoo(voo.getNumeroVoo()) == false) {
             result = "Os passageiros não foram listados pois esse voo não existe";
@@ -201,7 +201,7 @@ public class Aeroporto {
                 result = result + passageiros.toString() + "\n";
             }
         }
-        JOptionPane.showMessageDialog(null, result);
+        JOptionPane.showMessageDialog(null, result, "Passageiros do Voo", JOptionPane.PLAIN_MESSAGE);
     }
 
     public static boolean existeIdAviao(String id) {

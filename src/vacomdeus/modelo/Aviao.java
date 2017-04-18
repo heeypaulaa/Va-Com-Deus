@@ -6,18 +6,17 @@ public class Aviao {
     private Double altura;
     private Double tamanhoEnvergaduraAsa;
     private Double comprimento;
-    private Double capacidadeCarga;
+    final Double capacidadeCarga = 30000.0;
     private int capacidadePassageiros;
     private String id;
 
     public Aviao(Double autonomia, Double altura, Double tamanhoEnvergaduraAsa, Double comprimento,
-                 Double capacidadeCarga, int capacidadePassageiros, String id) {
+                 int capacidadePassageiros, String id) {
         super();
         this.autonomia = autonomia;
         this.altura = altura;
         this.tamanhoEnvergaduraAsa = tamanhoEnvergaduraAsa;
         this.comprimento = comprimento;
-        this.capacidadeCarga = capacidadeCarga;
         this.capacidadePassageiros = capacidadePassageiros;
         this.id = id;
     }
@@ -65,14 +64,6 @@ public class Aviao {
 
     public void setComprimento(Double comprimento) {
         this.comprimento = comprimento;
-    }
-
-    public Double getCapacidadeCarga() {
-        return capacidadeCarga;
-    }
-
-    public void setCapacidadeCarga(Double capacidadeCarga) {
-        this.capacidadeCarga = capacidadeCarga;
     }
 
     public int getCapacidadePassageiros() {
