@@ -157,18 +157,27 @@ public class Aeroporto {
 
     public static void listarVoos() {
         String result = "";
-        for (Voo v : voos) {
-            result = result + v.toString() + "\n";
+        if ((voos.size()) == 0) {
+            result = "Não possui nenhum voo cadastrado";
+        } else {
+            for (Voo v : voos) {
+                result = result + v.toString() + "\n";
+            }
         }
         JOptionPane.showMessageDialog(null, result);
     }
 
     public static void listarVoosData(Date data) {
         String result = "";
+        int i = 0;
         for (Voo v : voos) {
             if (v.getData().equals(data)) {
                 result = result + v.toString() + "\n";
+                i++;
             }
+        }
+        if (i == 0) {
+            result = "Não tem nenhum Voo cadastrado nesta data";
         }
         JOptionPane.showMessageDialog(null, result);
     }
@@ -185,6 +194,9 @@ public class Aeroporto {
 
     public static void listarPassageirosVoo(Voo voo) {
         String result = "";
+        if (existeIdVoo(voo.getNumeroVoo()) == false) {
+            result = "Os passageiros não foram listados pois esse voo não existe";
+        }
         for (Voo v : voos) {
             if (v.equals(voo)) {
                 result = result + passageiros.toString() + "\n";

@@ -1,0 +1,145 @@
+Index: src/Aeroporto.java
+===================================================================
+--- src/Aeroporto.java	(revision 29b33086ece5f00033a76349f1b1d5f2eeef6d96)
++++ src/Aeroporto.java	(revision cd3b7ce69e76bf33f3bf31c005ae6d342e2e2b84)
+@@ -44,9 +44,9 @@
+ 	/*AVIÃO*/
+ 
+     public static boolean cadastrarAviao(Aviao aviao) {
+-        if (aviao.getAltura().equals(null) || aviao.getId().equals(null) || aviao.getAutonomia().equals(null) ||
+-                aviao.getCapacidadeCarga().equals(null) || (aviao.getCapacidadePassageiros() < 1) ||
+-                aviao.getComprimento().equals(null) || aviao.getTamanhoEnvergaduraAsa().equals(null)) {
++        if ((aviao.getAltura() < 1) || (aviao.getId().equals(null)) || (aviao.getAutonomia() < 1) ||
++                (aviao.getCapacidadeCarga() < 1) || (aviao.getCapacidadePassageiros() < 1) ||
++                (aviao.getComprimento() < 1) || (aviao.getTamanhoEnvergaduraAsa() < 1)) {
+             return false;
+         }
+         avioes.add(aviao);
+@@ -198,9 +198,9 @@
+         return false;
+     }
+ 
+-    public static boolean existeIdVoo(String id) {
++    public static boolean existeIdVoo(int id) {
+         for (Voo v : voos) {
+-            if (v.getNumeroVoo == id) {
++            if (v.getNumeroVoo() == (id)) {
+                 return true;
+             }
+         }
+Index: src/Aviao.java
+===================================================================
+--- src/Aviao.java	(revision 29b33086ece5f00033a76349f1b1d5f2eeef6d96)
++++ src/Aviao.java	(revision cd3b7ce69e76bf33f3bf31c005ae6d342e2e2b84)
+@@ -28,9 +28,11 @@
+ 
+     @Override
+     public String toString() {
+-        return "Aviao [autonomia=" + autonomia + ", altura=" + altura + ", tamanhoEnvergaduraAsa="
+-                + tamanhoEnvergaduraAsa + ", comprimento=" + comprimento + ", capacidadeCarga=" + capacidadeCarga
+-                + ", capacidadePassageiros=" + capacidadePassageiros + ", id=" + id + "]";
++        System.out.print(99);
++        return "Autonomia: " + autonomia + ", altura:" + altura + ", Tamanho Envergadura da Asa:"
++                + tamanhoEnvergaduraAsa + ", comprimento:" + comprimento + ", Capacidade  de Carga:" + capacidadeCarga
++                + ", Capacidade Passageiros: " + capacidadePassageiros + ", id:" + id;
++
+     }
+ 
+     public Double getAutonomia() {
+Index: src/Principal.java
+===================================================================
+--- src/Principal.java	(revision 29b33086ece5f00033a76349f1b1d5f2eeef6d96)
++++ src/Principal.java	(revision cd3b7ce69e76bf33f3bf31c005ae6d342e2e2b84)
+@@ -1,3 +1,4 @@
++import com.sun.xml.internal.bind.v2.runtime.SchemaTypeTransducer;
+ import sun.security.krb5.internal.crypto.dk.AesDkCrypto;
+ 
+ import javax.swing.JOptionPane;
+@@ -18,6 +19,9 @@
+         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento em metros", "Cadastro Avião", 3)));
+         aviao.setCapacidadeCarga(Double.parseDouble(JOptionPane.showInputDialog(null, "Capacidade de Carga em toneladas", "Cadastro Avião", 3)));
+         aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Cadastro Avião", 3)));
++        aviao.setTamanhoEnvergaduraAsa(Double.parseDouble(JOptionPane.showInputDialog(null, "Tamanho envergadura Asas", "Cadastro Avião", 3)));
++        // ;
++        System.out.println(aviao.toString());
+         if ((Aeroporto.cadastrarAviao(aviao)) == true) {
+             JOptionPane.showMessageDialog(null, "Avião Cadastrado com sucesso", "Cadastro Avião", JOptionPane.INFORMATION_MESSAGE);
+         } else {
+@@ -44,15 +48,15 @@
+     /*VOO*/
+     public static void menuCadastrarVoo() {
+         Voo voo = new Voo();
+-        String numeroVoo;
++        int numeroVoo;
+         do {
+-            numeroVoo = JOptionPane.showInputDialog(null, "Número do Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
++            numeroVoo = Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
+         } while (Aeroporto.existeIdVoo(numeroVoo));
+-        voo.setNumeroVoo(Integer.parseInt(numeroVoo));
++        voo.setNumeroVoo(numeroVoo);
+         String idAviao;
+         do {
+             idAviao = JOptionPane.showInputDialog(null, "ID do avião", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+-        } while (Aeroporto.existeIdAviao(numeroVoo));
++        } while (!Aeroporto.existeIdAviao(idAviao));
+         voo.setidAviao(idAviao);
+         voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
+         String data = JOptionPane.showInputDialog(null, "Data", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+@@ -129,8 +133,11 @@
+         } while (Aeroporto.validarEmail(email) == false);
+         passageiro.setEmail(email);
+         passageiro.setTelefone(JOptionPane.showInputDialog("Cadastro Passageiro\nTelefone:"));
+-        passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog("Cadastro Passageiro\nNúmero do Voo:")));
+-
++        int numeroVoo;
++        do {
++            numeroVoo = Integer.parseInt(JOptionPane.showInputDialog("Cadastro Passageiro\nNúmero do Voo:"));
++        } while (!Aeroporto.existeIdVoo(numeroVoo));
++        passageiro.setNumeroVoo(numeroVoo);
+         if ((Aeroporto.cadastrarPassageiros(passageiro)) == true) {
+             JOptionPane.showMessageDialog(null, "Passageiro Cadastrado com sucesso", "Cadastro Passageiro", JOptionPane.INFORMATION_MESSAGE);
+         } else {
+@@ -168,10 +175,11 @@
+         do {
+             opcao = Integer.parseInt(JOptionPane.showInputDialog(null,
+                     "1 - Cadastrar Avião\n2 - Editar Avião\n3 - Remover Avião\n"
+-                    + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
+-                    + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
+-                            + "11 - Listar Voos por Data\n 12 - Listar Voos do dia\n 13 - Listar Voos do Passageiro" +
+-                            "\n 14 - Listar os passageiros de um voo de acordo com o número do voo", "Vá Com Deus", 3));
++                            + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
++                            + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
++                            + "11 - Listar Voos por Data\n12 - Listar Voos do dia\n13 - Listar Voos do Passageiro" +
++                            "\n14 - Listar os passageiros de um voo de acordo com o número do voo\n15 - Listar todos os Voos\n" +
++                            "16 - Listar todos os aviões\n17 - Listar todos os passageiros", "Vá Com Deus", 3));
+ 
+             switch (opcao) {
+                 case 1://if (opcao.equals("1")) {
+@@ -216,6 +224,15 @@
+                     break;
+                 case 14: //Listar os passageiros de um voo de acordo com o número do voo
+ 
++                    break;
++                case 15:
++                    Aeroporto.listarVoos();
++                    break;
++                case 16:
++                    Aeroporto.listarAvioes();
++                    break;
++                case 17:
++                    Aeroporto.listarPassageiros();
+                     break;
+                 default:
+                     break;
+Index: src/Voo.java
+===================================================================
+--- src/Voo.java	(revision 29b33086ece5f00033a76349f1b1d5f2eeef6d96)
++++ src/Voo.java	(revision cd3b7ce69e76bf33f3bf31c005ae6d342e2e2b84)
+@@ -10,7 +10,6 @@
+     private StatusVoo statusVoo;/*confimado, cancelado e atrasado*/
+     private String destino;
+     private String origem;
+-    public String getNumeroVoo;
+ 
+     public Voo() {
+         super();
