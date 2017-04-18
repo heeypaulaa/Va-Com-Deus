@@ -18,7 +18,7 @@ public class Aeroporto {
     public static Date StringToDate(String data) {  /*muda string para date*/
         Date date = null;
         try {
-            DateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); /*formato da data*/
+            DateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm"); /*formato da data*/
             date = formato.parse(data); /*muda para date*/
         } catch (ParseException e) {
             e.printStackTrace();
@@ -46,7 +46,6 @@ public class Aeroporto {
     }
 
 	/*AVIÃO*/
-
     public static boolean cadastrarAviao(Aviao aviao) {
         if ((aviao.getAltura() < 1) || (aviao.getId().equals(null)) || (aviao.getAutonomia() < 1) ||
                 (aviao.getCapacidadeCarga() < 1) || (aviao.getCapacidadePassageiros() < 1) ||
@@ -82,7 +81,6 @@ public class Aeroporto {
             System.out.println(a.toString());
         }
     }
-
 
     /*PASSAGEIROS*/
     public static boolean cadastrarPassageiros(Passageiro passageiro) {
@@ -122,9 +120,9 @@ public class Aeroporto {
 
     /*VOOS*/
     public static boolean cadastrarVoos(Voo voo) {
-        if ((voo.getNumeroVoo() > 0) || voo.getCompanhiaAerea().equals(null) || voo.getData().equals(null) ||
-                voo.getDestino().equals(null) || voo.getOrigem().equals(null) || voo.getHorarioVoo().equals(null) ||
-                voo.getidAviao().equals(null) || voo.getStatusVoo().equals(null)) {
+        if ((voo.getNumeroVoo() > 0) || voo.getCompanhiaAerea().equals(null) || voo.getDataHorario().equals(null) ||
+                voo.getDestino().equals(null) || voo.getOrigem().equals(null) || voo.getidAviao().equals(null) ||
+                voo.getStatusVoo().equals(null)) {
             if (voos.size() < 100) {
                 voos.add(voo);
                 return true;
@@ -166,7 +164,7 @@ public class Aeroporto {
     public static void listarVoosData(Date data) {
         String result = "";
         for (Voo v : voos) {
-            if (v.getData().equals(data)) {
+            if (v.getDataHorario().equals(data)) {
                 result = result + v.toString() + "\n";
             }
         }
@@ -183,7 +181,7 @@ public class Aeroporto {
         JOptionPane.showMessageDialog(null, result);
     }
 
-    public static void listarPassageirosVoo(Voo voo) {
+    public static void listarPassageirosV1oo(Voo voo) {
         String result = "";
         for (Voo v : voos) {
             if (v.equals(voo)) {

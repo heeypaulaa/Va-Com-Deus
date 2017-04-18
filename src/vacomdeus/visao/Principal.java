@@ -61,10 +61,10 @@ public class Principal {
         } while (!Aeroporto.existeIdAviao(idAviao));
         voo.setidAviao(idAviao);
         voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
-        String data = JOptionPane.showInputDialog(null, "Data", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
-        voo.setData(Aeroporto.StringToDate(data));
-        String horario = JOptionPane.showInputDialog(null, "Horário", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
-        voo.setHorarioVoo(Aeroporto.StringToDate(horario));
+        String dataHora = JOptionPane.showInputDialog(null, "Data e Horário", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+        voo.setDataHorario(Aeroporto.StringToDate(dataHora));
+        //String horario = JOptionPane.showInputDialog(null, "Horário", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+        //voo.setHorarioVoo(Aeroporto.StringToDate(horario));
         voo.setOrigem((JOptionPane.showInputDialog(null, "Origem", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE)));
         voo.setDestino((JOptionPane.showInputDialog(null, "Destino", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE)));
         int aux;
@@ -91,10 +91,8 @@ public class Principal {
         voo.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Remover Voo", 3)));
         voo.setidAviao(JOptionPane.showInputDialog(null, "ID do avião", "Remover Voo", 3)); //id do aviao
         voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Remover Voo", 3));
-        String data = JOptionPane.showInputDialog(null, "Data", "Remover Voo", 3);
-        voo.setData(Aeroporto.StringToDate(data));
-        String horario = JOptionPane.showInputDialog(null, "Horário", "Remover Voo", 3);
-        voo.setHorarioVoo(Aeroporto.StringToDate(horario));
+        String dataHorario = JOptionPane.showInputDialog(null, "Data e Horaŕio", "Remover Voo", 3);
+        voo.setDataHorario(Aeroporto.StringToDate(dataHorario));
         voo.setOrigem((JOptionPane.showInputDialog(null, "Origem", "Remover Voo", 3)));
         voo.setDestino((JOptionPane.showInputDialog(null, "Destino", "Remover Voo", 3)));
         int aux;
