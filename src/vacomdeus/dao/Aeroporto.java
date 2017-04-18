@@ -58,28 +58,32 @@ public class Aeroporto {
 
     public static boolean editaAviao(Aviao aviao) {
         for (Aviao a : avioes) {
-            if (a.equals(aviao)) {
-                Aviao aux = aviao;
-                aux.setAltura(1.5);
-                avioes.set(avioes.indexOf(a), aux);
+            if (a.getId().equals(aviao.getId())) {
+                avioes.set(avioes.indexOf(a), aviao);
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean removeAviao(Aviao aviao) {
-        if (existeAviao(aviao) == false) {
+    public static boolean removeAviao(String id) {
+        if (existeIdAviao(id) == false) {
             return false;
         }
-        avioes.remove(aviao);
+        avioes.remove(getAviao(id));
         return true;
     }
 
     public static void listarAvioes() {
-        for (Aviao a : avioes) {
-            System.out.println(a.toString());
+        String aux = "";
+        if (avioes.size() > 0) {
+            for (Aviao a : avioes) {
+                aux = aux + a.toString();
+            }
+        } else {
+            aux = "Não há nenhum avião cadastrado";
         }
+        JOptionPane.showMessageDialog(null, aux, "Aviões Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /*PASSAGEIROS*/
@@ -122,7 +126,7 @@ public class Aeroporto {
     public static boolean cadastrarVoos(Voo voo) {
         if ((voo.getNumeroVoo() > 0) || voo.getCompanhiaAerea().equals(null) || voo.getDataHorario().equals(null) ||
                 voo.getDestino().equals(null) || voo.getOrigem().equals(null) || voo.getidAviao().equals(null) ||
-                voo.getStatusVoo().equals(null)) {
+                voo.getStatusVoo().equals(null) || voo.getCarga() > 0) {
             if (voos.size() < 100) {
                 voos.add(voo);
                 return true;
@@ -258,4 +262,12 @@ public class Aeroporto {
         return date;
     }
 
+    public static Aviao getAviao(String id) {
+        for (Aviao a : avioes) {
+            if (a.getId().equals(id)) {
+                return a;
+            }
+        }
+        return null;
+    }
 }

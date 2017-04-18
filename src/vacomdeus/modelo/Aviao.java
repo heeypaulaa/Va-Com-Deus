@@ -6,7 +6,7 @@ public class Aviao {
     private Double altura;
     private Double tamanhoEnvergaduraAsa;
     private Double comprimento;
-    final Double capacidadeCarga = 30000.0;
+    final Double capacidadeCarga = 30.0;
     private int capacidadePassageiros;
     private String id;
 
@@ -27,7 +27,6 @@ public class Aviao {
 
     @Override
     public String toString() {
-        System.out.print(99);
         return "Autonomia: " + autonomia + ", altura:" + altura + ", Tamanho Envergadura da Asa:"
                 + tamanhoEnvergaduraAsa + ", comprimento:" + comprimento + ", Capacidade  de Carga:" + capacidadeCarga
                 + ", Capacidade Passageiros: " + capacidadePassageiros + ", id:" + id;

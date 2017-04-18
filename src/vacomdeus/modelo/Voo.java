@@ -14,14 +14,14 @@ public class Voo {
     private StatusVoo statusVoo;/*confimado, cancelado e atrasado*/
     private String destino;
     private String origem;
+    private Double carga;
 
     public Voo() {
         super();
     }
 
     public Voo(int numeroVoo, String companhiaAerea, String idAviao, Date dataHorario, StatusVoo statusVoo,
-               String destino, String origem) {
-        super();
+               String destino, String origem, Double carga) {
         this.numeroVoo = numeroVoo;
         this.companhiaAerea = companhiaAerea;
         this.idAviao = idAviao;
@@ -29,6 +29,7 @@ public class Voo {
         this.statusVoo = statusVoo;
         this.destino = destino;
         this.origem = origem;
+        this.carga = carga;
     }
 
     public int getNumeroVoo() {
@@ -79,6 +80,14 @@ public class Voo {
         this.destino = destino;
     }
 
+    public Double getCarga() {
+        return carga;
+    }
+
+    public void setCarga(Double carga) {
+        this.carga = carga;
+    }
+
     public String getOrigem() {
         return origem;
     }
@@ -92,7 +101,7 @@ public class Voo {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return "Número do Voo: " + numeroVoo + " Companhia Aérea: " + companhiaAerea + " Avião: " + idAviao
                 + " Data e Horário: " + sdf.format(dataHorario) + " Status Voo: " + statusVoo + " Destino: "
-                + destino + " Origem: " + origem;
+                + destino + " Origem: " + origem + " Carga: " + carga;
     }
 
 

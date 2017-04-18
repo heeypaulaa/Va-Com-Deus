@@ -21,8 +21,6 @@ public class Principal {
         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento em metros", "Cadastro Avião", 3)));
         aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Cadastro Avião", 3)));
         aviao.setTamanhoEnvergaduraAsa(Double.parseDouble(JOptionPane.showInputDialog(null, "Tamanho envergadura Asas", "Cadastro Avião", 3)));
-        // ;
-        System.out.println(aviao.toString());
         if ((Aeroporto.cadastrarAviao(aviao)) == true) {
             JOptionPane.showMessageDialog(null, "Avião Cadastrado com sucesso", "Cadastro Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -31,18 +29,33 @@ public class Principal {
     }
 
     public static void menuRemoverAviao() {
-        Aviao aviao = new Aviao();
-        aviao.setId(JOptionPane.showInputDialog(null, "ID", "Excluir Avião", JOptionPane.QUESTION_MESSAGE));
-        aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog(null, "Altura", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
-        aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog(null, "Autonomia", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
-        aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
-        aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Excluir Avião", JOptionPane.QUESTION_MESSAGE)));
-        if ((Aeroporto.removeAviao(aviao)) == true) {
+        String id = JOptionPane.showInputDialog(null, "ID do Avião a ser Excluído", "Excluir Avião", JOptionPane.QUESTION_MESSAGE);
+        if ((Aeroporto.removeAviao(id)) == true) {
             JOptionPane.showMessageDialog(null, "Avião removido com sucesso", "Excluir Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Avião não removido", "Excluir Avião", JOptionPane.ERROR_MESSAGE);
         }
+    }
 
+    public static void menuEditarAviao() {
+        String id = JOptionPane.showInputDialog(null, "ID do Avião a ser Editado", "Editar Avião", JOptionPane.QUESTION_MESSAGE);
+        if (Aeroporto.existeIdAviao(id) == false) {
+            JOptionPane.showMessageDialog(null, "Avião inexistente", "Editar Avião", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            Aviao aviao = new Aviao();
+            aviao.setId(id);
+            aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog(null, "Altura em metros", "Editar Avião", 3)));
+            aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog(null, "Autonomia em km", "Editar Avião", 3)));
+            aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento em metros", "Editar Avião", 3)));
+            aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Editar Avião", 3)));
+            aviao.setTamanhoEnvergaduraAsa(Double.parseDouble(JOptionPane.showInputDialog(null, "Tamanho envergadura Asas", "Editar Avião", 3)));
+            Aeroporto.editaAviao(aviao);
+            if ((Aeroporto.editaAviao(aviao)) == true) {
+                JOptionPane.showMessageDialog(null, "Avião editado com sucesso", "Editar Avião", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(null, "Erro - Avião não editado", "Editar Avião", JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }
 
     /*VOO*/
@@ -59,14 +72,12 @@ public class Principal {
         } while (!Aeroporto.existeIdAviao(idAviao));
         voo.setidAviao(idAviao);
         voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
-        String dataHora = JOptionPane.showInputDialog(null, "Data e Horário", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+        String dataHora = JOptionPane.showInputDialog(null, "Data e Horário dd/mm/aaaa hh:mm", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
         voo.setDataHorario(Aeroporto.StringToDate(dataHora));
-        //String horario = JOptionPane.showInputDialog(null, "Horário", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
-        //voo.setHorarioVoo(Aeroporto.StringToDate(horario));
         voo.setOrigem((JOptionPane.showInputDialog(null, "Origem", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE)));
         voo.setDestino((JOptionPane.showInputDialog(null, "Destino", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE)));
-        int aux;
-        aux = Integer.parseInt(JOptionPane.showInputDialog(null, "Status Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
+        voo.setCarga(Double.parseDouble(JOptionPane.showInputDialog(null, "Carga em toneladas", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE)));
+        int aux = Integer.parseInt(JOptionPane.showInputDialog(null, "Status Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
         if (aux == (1)) {
             voo.setStatusVoo(StatusVoo.CONFIRMADO);
         }
@@ -76,7 +87,6 @@ public class Principal {
         if (aux == (3)) {
             voo.setStatusVoo(StatusVoo.ATRASADO);
         }
-
         if ((Aeroporto.cadastrarVoos(voo)) == true) {
             JOptionPane.showMessageDialog(null, "Voo Cadastrado com sucesso", "Cadastro Voo", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -110,6 +120,7 @@ public class Principal {
             JOptionPane.showMessageDialog(null, "Erro - Voo não removido, não existe", "Remover Voo", JOptionPane.ERROR_MESSAGE);
         }
     }
+
 
 
     /*PASSAGEIRO*/
@@ -176,24 +187,23 @@ public class Principal {
                             + "4 - Cadastrar Passageiro\n5 - Editar Passageiro\n6 - Remover Passageiro\n"
                             + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
                             + "11 - Listar Voos por Data\n12 - Listar Voos do dia\n13 - Listar Voos do Passageiro" +
-                            "\n14 - Listar os passageiros de um voo de acordo com o número do voo\n15 - Listar todos os Voos\n" +
-                            "16 - Listar todos os aviões\n17 - Listar todos os passageiros", "Vá Com Deus", 3));
+                            "\n14 - Listar os passageiros de um voo de acordo com o número do voo\n15 - Listar todos os aviões" +
+                            "\n17 - Listar todos os passageiros", "Vá Com Deus", 3));
 
             switch (opcao) {
-                case 1://if (opcao.equals("1")) {
+                case 1:
                     menuCadastrarAviao();
                     break;
-                case 2://} else if (opcao.equals("2")) {
-                    // buscar(lista);
+                case 2:
+                    menuEditarAviao();
                     break;
-                case 3://} else if (opcao.equals("3")) {
+                case 3:
                     menuRemoverAviao();
                     break;
-                case 4://} else if (opcao.equals("4")) {
+                case 4:
                     menuCadastrarPassageiro();
                     break;
-                case 5://} else if (opcao.equals("5")) {
-                    // imprimir(lista);
+                case 5:
                     break;
                 case 6://} else if (opcao.equals("6")) {
                     menuRemoverPassageiro();
@@ -224,12 +234,9 @@ public class Principal {
 
                     break;
                 case 15:
-                    Aeroporto.listarVoos();
-                    break;
-                case 16:
                     Aeroporto.listarAvioes();
                     break;
-                case 17:
+                case 16:
                     Aeroporto.listarPassageiros();
                     break;
                 default:
