@@ -2,6 +2,7 @@ package vacomdeus.modelo;
 
 import vacomdeus.modelo.StatusVoo;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Voo {
@@ -9,8 +10,7 @@ public class Voo {
     private int numeroVoo;
     private String companhiaAerea;
     private String idAviao;
-    private Date data;
-    private Date horarioVoo;
+    private Date dataHorario;
     private StatusVoo statusVoo;/*confimado, cancelado e atrasado*/
     private String destino;
     private String origem;
@@ -19,14 +19,13 @@ public class Voo {
         super();
     }
 
-    public Voo(int numeroVoo, String companhiaAerea, String idAviao, Date data, Date horarioVoo, StatusVoo statusVoo,
+    public Voo(int numeroVoo, String companhiaAerea, String idAviao, Date dataHorario, StatusVoo statusVoo,
                String destino, String origem) {
         super();
         this.numeroVoo = numeroVoo;
         this.companhiaAerea = companhiaAerea;
         this.idAviao = idAviao;
-        this.data = data;
-        this.horarioVoo = horarioVoo;
+        this.dataHorario = dataHorario;
         this.statusVoo = statusVoo;
         this.destino = destino;
         this.origem = origem;
@@ -56,20 +55,12 @@ public class Voo {
         this.idAviao = idAviao;
     }
 
-    public Date getData() {
-        return data;
+    public Date getDataHorario() {
+        return dataHorario;
     }
 
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public Date getHorarioVoo() {
-        return horarioVoo;
-    }
-
-    public void setHorarioVoo(Date horarioVoo) {
-        this.horarioVoo = horarioVoo;
+    public void setDataHorario(Date dataHorario) {
+        this.dataHorario = dataHorario;
     }
 
     public StatusVoo getStatusVoo() {
@@ -98,8 +89,9 @@ public class Voo {
 
     @Override
     public String toString() {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return "Número do Voo: " + numeroVoo + "\tCompanhia Aérea: " + companhiaAerea + "\tAvião: " + idAviao
-                + "\tData: " + data + "\tHorário do Voo=" + horarioVoo + "\tStatus Voo: " + statusVoo + "\tDestino: "
+                + "\tData e Horário: " + sdf.format(dataHorario) + "\tStatus Voo: " + statusVoo + "\tDestino: "
                 + destino + "\tOrigem: " + origem;
     }
 
