@@ -120,12 +120,15 @@ public class Aeroporto {
         return false;
     }
 
-    public static boolean removePassageiro(Passageiro passageiro) {
-        if ((existePassageiro(passageiro)) == false) {
-            return false;
+    public static boolean removePassageiro(String cpf) {
+        if (passageiros != null) {
+            for (Passageiro p : passageiros) {
+                if (p.getCpf().equals(cpf))
+                    passageiros.remove(p);
+                return true;
+            }
         }
-        passageiros.remove(passageiro);
-        return true;
+        return false;
     }
 
     public static void listarPassageiros() {
@@ -289,6 +292,7 @@ public class Aeroporto {
     }
 
     public static Aviao getAviao(String id) {
+
         for (Aviao a : avioes) {
             if (a.getId().equals(id)) {
                 return a;
