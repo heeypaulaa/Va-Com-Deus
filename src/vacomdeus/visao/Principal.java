@@ -182,13 +182,13 @@ public class Principal {
     }
 
     public static void menuRemoverPassageiro() {
-        Passageiro passageiro = new Passageiro();
-        passageiro.setNome(JOptionPane.showInputDialog(null, "Nome", "Remover Passageiro", 3));
+        //Passageiro passageiro = new Passageiro();
+        //passageiro.setNome(JOptionPane.showInputDialog(null, "Nome", "Remover Passageiro", 3));
         String cpf;
         do {
             cpf = JOptionPane.showInputDialog(null, "CPF", "Remover Passageiro", 3);
         } while (Aeroporto.validarCPF(cpf) == false);
-        passageiro.setCpf(cpf);
+        /*passageiro.setCpf(cpf);
         String aux = JOptionPane.showInputDialog(null, "Data de Nascimento", "Remover Passageiro", 3);
         passageiro.setDataNascimento(Aeroporto.StringToDate(aux));
         String email;
@@ -198,7 +198,8 @@ public class Principal {
         passageiro.setEmail(email);
         passageiro.setTelefone(JOptionPane.showInputDialog(null, "Telefone", "Remover Passageiro", 3));
         passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Remover Passageiro", 3)));
-        if ((Aeroporto.removePassageiro(passageiro)) == true) {
+        */
+        if ((Aeroporto.removePassageiro(cpf)) == true) {
             JOptionPane.showMessageDialog(null, "Passageiro removido com sucesso", "Remover Passageiro", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Passageiro não removido", "Remover Passageiro", JOptionPane.ERROR_MESSAGE);
