@@ -3,11 +3,17 @@ package vacomdeus.dao;
 import vacomdeus.modelo.*;
 
 import javax.swing.*;
+import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+
+import java.io.FileWriter;
+import java.io.IOException;
+
+import com.google.gson.Gson;
 
 public class Aeroporto {
 
@@ -299,5 +305,25 @@ public class Aeroporto {
             }
         }
         return null;
+    }
+
+    public static boolean exportarDadosAvioes() {
+        Gson gson = new Gson();
+        try {
+            //Escreve Json convertido em arquivo chamado "file.json"
+            FileWriter writer = new FileWriter("file.json");
+            for (Aviao a : avioes) {
+                String aux = gson.toJson(a);
+                // System.out.println(aux);
+                writer.write(aux);
+                writer.write("\n");//Não sei se pode ter esse \n
+
+            }
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
     }
 }

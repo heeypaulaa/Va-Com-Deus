@@ -6,6 +6,7 @@ import vacomdeus.dao.Aeroporto;
 import javax.swing.JOptionPane;
 import java.text.ParseException;
 
+
 public class Principal {
 
     /*AVIÃO*/
@@ -237,7 +238,7 @@ public class Principal {
                             + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
                             + "11 - Listar Voos por Data\n12 - Listar Voos do dia\n13 - Listar Voos do Passageiro" +
                             "\n14 - Listar os passageiros de um voo de acordo com o número do voo\n15 - Listar todos os aviões" +
-                            "\n17 - Listar todos os passageiros", "Vá Com Deus", 3));
+                            "\n17 - Listar todos os passageiros\n18 - Exportar Dados Avioes\n19 - Importar Dados", "Vá Com Deus", 3));
 
             switch (opcao) {
                 case 1:
@@ -288,6 +289,10 @@ public class Principal {
                     break;
                 case 16:
                     Aeroporto.listarPassageiros();
+                    break;
+                case 18:
+                    Aeroporto.exportarDadosAvioes();
+
                     break;
                 default:
                     break;
