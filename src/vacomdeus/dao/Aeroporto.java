@@ -1,5 +1,6 @@
 package vacomdeus.dao;
 
+import com.google.gson.Gson;
 import vacomdeus.modelo.*;
 
 import javax.swing.*;
@@ -13,7 +14,6 @@ import java.util.Date;
 import java.io.FileWriter;
 import java.io.IOException;
 
-import com.google.gson.Gson;
 
 public class Aeroporto {
 
@@ -107,7 +107,7 @@ public class Aeroporto {
     /*PASSAGEIROS*/
     public static boolean cadastrarPassageiros(Passageiro passageiro) {
         if (passageiro.getCpf().equals(null) || passageiro.getDataNascimento().equals(null) || passageiro.getEmail().equals(null) ||
-                passageiro.getNome().equals(null) || (passageiro.getNumeroVoo() > 0) || passageiro.getTelefone().equals(null)) {
+                passageiro.getNome().equals(null) || (passageiro.getNumeroVoo() < 0) || passageiro.getTelefone().equals(null)) {
             return false;
         }
         passageiros.add(passageiro);
