@@ -97,6 +97,7 @@ public class Aeroporto {
         JOptionPane.showMessageDialog(null, aux, "Aviões Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }
 
+
     /*PASSAGEIROS*/
     public static boolean cadastrarPassageiros(Passageiro passageiro) {
         if (passageiro.getCpf().equals(null) || passageiro.getDataNascimento().equals(null) || passageiro.getEmail().equals(null) ||
@@ -108,12 +109,12 @@ public class Aeroporto {
     }
 
     public static boolean editaPassageiro(Passageiro passageiro) {
-        for (Passageiro p : passageiros) {
-            if (p.equals(passageiro)) {
-                Passageiro aux = passageiro;
-                aux.setEmail("");
-                passageiros.set(passageiros.indexOf(p), aux);
-                return true;
+        if (passageiros != null) {
+            for (Passageiro p : passageiros) {
+                if (p.getCpf().equals(passageiro.getCpf())) {
+                    passageiros.set(passageiros.indexOf(p), passageiro);
+                    return true;
+                }
             }
         }
         return false;
@@ -131,6 +132,17 @@ public class Aeroporto {
         for (Passageiro p : passageiros) {
             System.out.println(p.toString());
         }
+    }
+
+    public static Passageiro getPassageiro(String cpf) {
+        if (passageiros != null) {
+            for (Passageiro p : passageiros) {
+                if (p.getCpf().equals(cpf)) {
+                    return p;
+                }
+            }
+        }
+        return null;
     }
 
     /*VOOS*/

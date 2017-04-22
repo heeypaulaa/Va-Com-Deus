@@ -204,6 +204,29 @@ public class Principal {
         }
     }
 
+    public static void menuEditarPassageiro() {
+        Passageiro passageiro = new Passageiro();
+        String cpf;
+        do {
+            cpf = JOptionPane.showInputDialog(null, "CPF do Passageiro", "Editar Passageiro", 3);
+        } while (Aeroporto.validarCPF(cpf) == false);
+        passageiro.setCpf(cpf);
+        passageiro = Aeroporto.getPassageiro(cpf);
+        passageiro.setNome(JOptionPane.showInputDialog(null, passageiro.getNome(), "Editar Passageiro", 3));
+        String email;
+        do {
+            email = JOptionPane.showInputDialog(null, passageiro.getEmail(), "Editar Passageiro", 3);
+        } while (Aeroporto.validarEmail(email) == false);
+        passageiro.setEmail(email);
+        passageiro.setTelefone(JOptionPane.showInputDialog(null, passageiro.getTelefone(), "Editar Passageiro", 3));
+        passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, passageiro.getNumeroVoo(), "Remover Passageiro", 3)));
+        if ((Aeroporto.editaPassageiro(passageiro)) == true) {
+            JOptionPane.showMessageDialog(null, "Passageiro editado com sucesso", "Editar Passageiro", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Erro - Passageiro não editado", "Editar Passageiro", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
     public static void main(String[] args) throws ParseException {
         int opcao;
         do {
@@ -229,6 +252,7 @@ public class Principal {
                     menuCadastrarPassageiro();
                     break;
                 case 5:
+                    menuEditarPassageiro();
                     break;
                 case 6:
                     menuRemoverPassageiro();
