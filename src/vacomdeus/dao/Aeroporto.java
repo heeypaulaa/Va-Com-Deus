@@ -310,7 +310,7 @@ public class Aeroporto {
             FileWriter writer = new FileWriter("file.json");
             for (Aviao a : avioes) {
                 String aux = gson.toJson(a);
-                System.out.println(aux);
+                // System.out.println(aux);
                 writer.write(aux);
                 writer.write("\n");//Não sei se pode ter esse \n
 
