@@ -307,9 +307,48 @@ public class Aeroporto {
         Gson gson = new Gson();
         try {
             //Escreve Json convertido em arquivo chamado "file.json"
-            FileWriter writer = new FileWriter("file.json");
+            FileWriter writer = new FileWriter("avioes.json");
             for (Aviao a : avioes) {
                 String aux = gson.toJson(a);
+                // System.out.println(aux);
+                writer.write(aux);
+                writer.write("\n");//Não sei se pode ter esse \n
+
+            }
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean exportarDadosVoos() {
+        Gson gson = new Gson();
+        try {
+            //Escreve Json convertido em arquivo chamado "file.json"
+            FileWriter writer = new FileWriter("voos.json");
+            for (Voo v : voos) {
+                String aux = gson.toJson(v);
+                // System.out.println(aux);
+                writer.write(aux);
+                writer.write("\n");//Não sei se pode ter esse \n
+
+            }
+            writer.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    public static boolean exportarDadosPassageiros() {
+        Gson gson = new Gson();
+        try {
+            FileWriter writer = new FileWriter("passageiros.json");
+            for (Passageiro p : passageiros) {
+                String aux = gson.toJson(p);
                 // System.out.println(aux);
                 writer.write(aux);
                 writer.write("\n");//Não sei se pode ter esse \n
