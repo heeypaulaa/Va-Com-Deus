@@ -15,10 +15,21 @@ public class Aeroporto {
     private static ArrayList<Passageiro> passageiros = new ArrayList<Passageiro>();
     private static ArrayList<Voo> voos = new ArrayList<Voo>();
 
-    public static Date StringToDate(String data) {  /*muda string para date*/
+    public static Date StringToDateHour(String data) {  /*muda string para date*/
         Date date = null;
         try {
             DateFormat formato = new SimpleDateFormat("dd/MM/yyyy HH:mm"); /*formato da data*/
+            date = formato.parse(data); /*muda para date*/
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date;
+    }
+
+    public static Date StringToDate(String data) {  //muda string para date*/
+        Date date = null;
+        try {
+            DateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); /*formato da data*/
             date = formato.parse(data); /*muda para date*/
         } catch (ParseException e) {
             e.printStackTrace();
@@ -136,25 +147,26 @@ public class Aeroporto {
     }
 
     public static boolean editaVoo(Voo voo) {
-        for (Voo v : voos) {
-            if (v.equals(voo)) {
-                Voo aux = voo;
-                aux.setDestino("Arcos");
-                ;
-                voos.set(voos.indexOf(v), aux);
-                return true;
+        if (voos != null) {
+            for (Voo v : voos) {
+                if (v.getidAviao().equals(voo.getidAviao())) {
+                    voos.set(voos.indexOf(v), voo);
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    public static boolean removeVoo(Voo voo) {
-        if ((existeVoo(voo)) == true) {
-            voos.remove(voo);
-            return true;
+    public static boolean removeVoo(String id) {
+        if (voos != null) {
+            for (Voo v : voos) {
+                if (v.getidAviao().equals(id)) ;
+                voos.remove(v);
+                return true;
+            }
         }
         return false;
-
     }
 
     public static void listarVoos() {
@@ -169,7 +181,7 @@ public class Aeroporto {
         JOptionPane.showMessageDialog(null, result, "Voos Cadastrados", JOptionPane.PLAIN_MESSAGE);
     }
 
-
+    /*LISTAR*/
     public static void listarVoosData(Date data) {
         String result = "";
         int i = 0;
@@ -208,6 +220,7 @@ public class Aeroporto {
         JOptionPane.showMessageDialog(null, result, "Passageiros do Voo", JOptionPane.PLAIN_MESSAGE);
     }
 
+    /*EXISTE*/
     public static boolean existeIdAviao(String id) {
         for (Aviao a : avioes) {
             if (a.getId().equals(id)) {
@@ -252,6 +265,7 @@ public class Aeroporto {
         }
         return false;
     }
+
 
     public static Date dataAtual() throws ParseException {
         Date d = new Date();
