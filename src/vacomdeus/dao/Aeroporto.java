@@ -14,7 +14,6 @@ import java.util.Date;
 import java.io.FileWriter;
 import java.io.IOException;
 
-
 public class Aeroporto {
 
     private static ArrayList<Aviao> avioes = new ArrayList<Aviao>();
