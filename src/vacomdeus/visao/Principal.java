@@ -125,6 +125,7 @@ public class Principal {
 
     public static void menuEditarVoo() {
         Voo voo = new Voo();
+        //Arrumar aqui igual do aviao
         voo.setidAviao(JOptionPane.showInputDialog(null, "ID do avião a ser editado", "Editar Voo", 3)); //id do aviao
         voo.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Editar Voo", 3)));
         voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Editar Voo", 3));
@@ -238,7 +239,7 @@ public class Principal {
                             + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
                             + "11 - Listar Voos por Data\n12 - Listar Voos do dia\n13 - Listar Voos do Passageiro" +
                             "\n14 - Listar os passageiros de um voo de acordo com o número do voo\n15 - Listar todos os aviões" +
-                            "\n17 - Listar todos os passageiros\n18 - Exportar Dados Avioes (tem que colocar dos Voos e passageiros)\n19 - Importar Dados", "Vá Com Deus", 3));
+                            "\n17 - Listar todos os passageiros\n18 - Exportar Dados Avioes (tem que colocar dos Voos e passageiros)\n19 - Importar Dados Avioes", "Vá Com Deus", 3));
 
             switch (opcao) {
                 case 1:
@@ -292,6 +293,11 @@ public class Principal {
                     break;
                 case 18:
                     Aeroporto.exportarDadosAvioes();
+                    break;
+
+                case 19:
+                    String nomeArq = JOptionPane.showInputDialog(null, "Digite o nome do arquivo");
+                    Aeroporto.importarDadosAviao(nomeArq);
 
                     break;
                 default:

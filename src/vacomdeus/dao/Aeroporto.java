@@ -15,6 +15,12 @@ import java.io.IOException;
 
 import com.google.gson.Gson;
 
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.Reader;
+
+
+
 public class Aeroporto {
 
     private static ArrayList<Aviao> avioes = new ArrayList<Aviao>();
@@ -364,5 +370,87 @@ public class Aeroporto {
             e.printStackTrace();
         }
         return true;
+    }
+
+    public static boolean importarDadosAviao(String nomeArq) {
+        Gson gson = new Gson();
+        Aviao aviao = new Aviao();
+        try {
+            FileReader reader;
+            reader = new FileReader(nomeArq);
+            BufferedReader leitor = new BufferedReader(reader);
+
+            String linha = leitor.readLine(); // lê a primeira linha
+            aviao = gson.fromJson(linha, Aviao.class);
+            //avioes.add(aviao);
+            //System.out.printf(aviao.toString());
+            while (linha != null) {
+                aviao = gson.fromJson(linha, Aviao.class);
+                System.out.printf(aviao.toString());
+                avioes.add(aviao);
+
+                linha = leitor.readLine(); // lê da segunda até a última linha
+            }
+
+            leitor.close();
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n",
+                    e.getMessage());
+        }
+
+
+        return true;
+
+    }
+
+    public static boolean importarDadosVoo(String nomeArq) {
+        Gson gson = new Gson();
+        Voo voo = new Voo();
+        try {
+            FileReader reader;
+            reader = new FileReader(nomeArq);
+            BufferedReader leitor = new BufferedReader(reader);
+
+            String linha = leitor.readLine(); // lê a primeira linha
+            voo = gson.fromJson(linha, Voo.class);
+            while (linha != null) {
+                voo = gson.fromJson(linha, Voo.class);
+                voos.add(voo);
+                linha = leitor.readLine(); // lê da segunda até a última linha
+            }
+
+            leitor.close();
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n",
+                    e.getMessage());
+        }
+        return true;
+
+    }
+
+
+    public static boolean importarDadosPassageiro(String nomeArq) {
+        Gson gson = new Gson();
+        Passageiro passageiro = new Passageiro();
+        try {
+            FileReader reader;
+            reader = new FileReader(nomeArq);
+            BufferedReader leitor = new BufferedReader(reader);
+
+            String linha = leitor.readLine(); // lê a primeira linha
+            passageiro = gson.fromJson(linha, Passageiro.class);
+            while (linha != null) {
+                passageiro = gson.fromJson(linha, Passageiro.class);
+                passageiros.add(passageiro);
+                linha = leitor.readLine(); // lê da segunda até a última linha
+            }
+
+            leitor.close();
+        } catch (IOException e) {
+            System.err.printf("Erro na abertura do arquivo: %s.\n",
+                    e.getMessage());
+        }
+        return true;
+
     }
 }
