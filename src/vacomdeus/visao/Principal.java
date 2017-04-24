@@ -1,5 +1,6 @@
 package vacomdeus.visao;
 
+import vacomdeus.dao.Companhia;
 import vacomdeus.modelo.*;
 import vacomdeus.dao.Aeroporto;
 
@@ -11,18 +12,23 @@ public class Principal {
 
     /*AVIÃO*/
     public static void menuCadastrarAviao() {
-        Aviao aviao = new Aviao();
+        Aviao aviao = new Aviao();/*apagar */
+        String aux = Aeroporto.listarCompanhias();
+        String companhia = JOptionPane.showInputDialog(null, aux + "\nCompanhia:", "Cadastro Avião", 3);
+        if (Aeroporto.existeCompanhia(companhia) == false) {
+            Aeroporto.cadastraCompanhia(companhia);
+        }
         String id;
         do {
             id = JOptionPane.showInputDialog(null, "ID", "Cadastro Avião", 3);
-        } while (Aeroporto.existeIdAviao(id));
+        } while (Aeroporto.existeIdAviao(id, companhia));
         aviao.setId(id);
         aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog(null, "Altura em metros", "Cadastro Avião", 3)));
         aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog(null, "Autonomia em km", "Cadastro Avião", 3)));
         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento em metros", "Cadastro Avião", 3)));
         aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Cadastro Avião", 3)));
         aviao.setTamanhoEnvergaduraAsa(Double.parseDouble(JOptionPane.showInputDialog(null, "Tamanho envergadura Asas", "Cadastro Avião", 3)));
-        if ((Aeroporto.cadastrarAviao(aviao)) == true) {
+        if ((Aeroporto.cadastrarAviao(aviao, companhia)) == true) {
             JOptionPane.showMessageDialog(null, "Avião Cadastrado com sucesso", "Cadastro Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Avião não cadastrado", "Cadastro Avião", JOptionPane.ERROR_MESSAGE);
@@ -30,8 +36,13 @@ public class Principal {
     }
 
     public static void menuRemoverAviao() {
+        String aux = Aeroporto.listarCompanhias();
+        String companhia;
+        do {
+            companhia = JOptionPane.showInputDialog(null, aux + "\nCompanhia do Avião a ser Excluído", "Excluir Avião", JOptionPane.QUESTION_MESSAGE);
+        } while (!Aeroporto.existeCompanhia(companhia));
         String id = JOptionPane.showInputDialog(null, "ID do Avião a ser Excluído", "Excluir Avião", JOptionPane.QUESTION_MESSAGE);
-        if ((Aeroporto.removeAviao(id)) == true) {
+        if ((Aeroporto.removeAviao(id, companhia)) == true) {
             JOptionPane.showMessageDialog(null, "Avião removido com sucesso", "Excluir Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Avião não removido", "Excluir Avião", JOptionPane.ERROR_MESSAGE);
@@ -39,6 +50,11 @@ public class Principal {
     }
 
     public static void menuEditarAviao() {
+        String aux = Aeroporto.listarCompanhias();
+        String companhia;
+        do {
+            companhia = JOptionPane.showInputDialog(null, aux + "\nCompanhia do Avião a ser Editado", "Excluir Avião", JOptionPane.QUESTION_MESSAGE);
+        } while (!Aeroporto.existeCompanhia(companhia));
         String id = JOptionPane.showInputDialog(null, "ID do Avião a ser Editado", "Editar Avião", JOptionPane.QUESTION_MESSAGE);
         if (Aeroporto.existeIdAviao(id) == false) {
             JOptionPane.showMessageDialog(null, "Avião inexistente", "Editar Avião", JOptionPane.INFORMATION_MESSAGE);
@@ -50,8 +66,8 @@ public class Principal {
             aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento em metros", "Editar Avião", 3)));
             aviao.setCapacidadePassageiros(Integer.parseInt(JOptionPane.showInputDialog(null, "Capacidade Passageiros", "Editar Avião", 3)));
             aviao.setTamanhoEnvergaduraAsa(Double.parseDouble(JOptionPane.showInputDialog(null, "Tamanho envergadura Asas", "Editar Avião", 3)));
-            Aeroporto.editaAviao(aviao);
-            if ((Aeroporto.editaAviao(aviao)) == true) {
+            Aeroporto.editaAviao(aviao, companhia);
+            if ((Aeroporto.editaAviao(aviao, companhia)) == true) {
                 JOptionPane.showMessageDialog(null, "Avião editado com sucesso", "Editar Avião", JOptionPane.INFORMATION_MESSAGE);
             } else {
                 JOptionPane.showMessageDialog(null, "Erro - Avião não editado", "Editar Avião", JOptionPane.ERROR_MESSAGE);
@@ -65,14 +81,18 @@ public class Principal {
         int numeroVoo;
         do {
             numeroVoo = Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
-        } while (Aeroporto.existeIdVoo(numeroVoo));
+        } while (Aeroporto.existeVoo(numeroVoo));
         voo.setNumeroVoo(numeroVoo);
+        String companhia;
+        do {
+            companhia = JOptionPane.showInputDialog(null, "Companhia Aerea", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+        } while (!Aeroporto.existeCompanhia(companhia));
+        voo.setCompanhiaAerea(companhia);
         String idAviao;
         do {
-            idAviao = JOptionPane.showInputDialog(null, "ID do avião", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
-        } while (!Aeroporto.existeIdAviao(idAviao));
+            idAviao = JOptionPane.showInputDialog(null, "ID do avião da companhia " + companhia, "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
+        } while (!Aeroporto.existeIdAviao(idAviao, companhia));
         voo.setidAviao(idAviao);
-        voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE));
         String dataHora = JOptionPane.showInputDialog(null, "Data e Horário dd/mm/aaaa hh:mm", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE);
         voo.setDataHorario(Aeroporto.StringToDateHour(dataHora));
         voo.setOrigem((JOptionPane.showInputDialog(null, "Origem", "Cadastro Voo", JOptionPane.QUESTION_MESSAGE)));
@@ -88,7 +108,7 @@ public class Principal {
         if (aux == (3)) {
             voo.setStatusVoo(StatusVoo.ATRASADO);
         }
-        if ((Aeroporto.cadastrarVoos(voo)) == true) {
+        if ((Aeroporto.cadastrarVoos(voo, companhia)) == true) {
             JOptionPane.showMessageDialog(null, "Voo Cadastrado com sucesso", "Cadastro Voo", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Voo não cadastrado", "Cadastro Voo", JOptionPane.ERROR_MESSAGE);
@@ -96,26 +116,7 @@ public class Principal {
     }
 
     public static void menuRemoverVoo() {
-        //Voo voo = new Voo();
-        //voo.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Remover Voo", 3)));
-        //voo.setidAviao(JOptionPane.showInputDialog(null, "ID do avião", "Remover Voo", 3)); //id do aviao
-        String aux = JOptionPane.showInputDialog(null, "ID do avião", "Remover Voo", 3);
-        /*voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Remover Voo", 3));
-        String dataHorario = JOptionPane.showInputDialog(null, "Data e Horaŕio", "Remover Voo", 3);
-        voo.setDataHorario(Aeroporto.StringToDate(dataHorario));
-        voo.setOrigem((JOptionPane.showInputDialog(null, "Origem", "Remover Voo", 3)));
-        voo.setDestino((JOptionPane.showInputDialog(null, "Destino", "Remover Voo", 3)));
-        int aux;
-        aux = Integer.parseInt(JOptionPane.showInputDialog(null, "Status Voo", "Remover Voo", 3));
-        if (aux == (1)) {
-            voo.setStatusVoo(StatusVoo.CONFIRMADO);
-        }
-        if (aux == (2)) {
-            voo.setStatusVoo(StatusVoo.CANCELADO);
-        }
-        if (aux == (3)) {
-            voo.setStatusVoo(StatusVoo.ATRASADO);
-        }*/
+        int aux = Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Remover Voo", 3));
         if ((Aeroporto.removeVoo(aux)) == true) {
             JOptionPane.showMessageDialog(null, "Voo removido com sucesso", "Remover Voo", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -125,10 +126,17 @@ public class Principal {
 
     public static void menuEditarVoo() {
         Voo voo = new Voo();
-        //Arrumar aqui igual do aviao
-        voo.setidAviao(JOptionPane.showInputDialog(null, "ID do avião a ser editado", "Editar Voo", 3)); //id do aviao
+        String companhia;
+        do {
+            companhia = JOptionPane.showInputDialog(null, "Companhia Aerea", "Editar Voo", 3);
+        } while (!Aeroporto.existeCompanhia(companhia));
+        voo.setCompanhiaAerea(companhia);
+        String id;
+        do {
+            id = (JOptionPane.showInputDialog(null, "ID do avião da companhia " + companhia + " a ser editado", "Editar Voo", 3)); //id do aviao
+        } while (!Aeroporto.existeIdAviao(id, companhia));
+        voo.setidAviao(id);
         voo.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo", "Editar Voo", 3)));
-        voo.setCompanhiaAerea(JOptionPane.showInputDialog(null, "Companhia Aerea", "Editar Voo", 3));
         String dataHorario = JOptionPane.showInputDialog(null, "Data e Horaŕio", "Editar Voo", 3);
         voo.setDataHorario(Aeroporto.StringToDateHour(dataHorario));
         voo.setOrigem((JOptionPane.showInputDialog(null, "Origem", "Editar Voo", 3)));
@@ -144,7 +152,7 @@ public class Principal {
         if (aux == (3)) {
             voo.setStatusVoo(StatusVoo.ATRASADO);
         }
-        if ((Aeroporto.editaVoo(voo)) == true) {
+        if ((Aeroporto.editaVoo(voo, companhia)) == true) {
             JOptionPane.showMessageDialog(null, "Voo editado com sucesso", "Editar Voo", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Voo não editado, não existe", "Editar Voo", JOptionPane.ERROR_MESSAGE);
@@ -173,7 +181,7 @@ public class Principal {
         int numeroVoo;
         do {
             numeroVoo = Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo:", "Cadastro Passageiro", 3));
-        } while (!Aeroporto.existeIdVoo(numeroVoo));
+        } while (!Aeroporto.existeVoo(numeroVoo));
         passageiro.setNumeroVoo(numeroVoo);
         if ((Aeroporto.cadastrarPassageiros(passageiro)) == true) {
             JOptionPane.showMessageDialog(null, "Passageiro Cadastrado com sucesso", "Cadastro Passageiro", JOptionPane.INFORMATION_MESSAGE);
@@ -239,7 +247,7 @@ public class Principal {
                             + "7 - Cadastrar Voo\n8 - Editar Voo\n9 - Remover Voo\n10 - Listar todos os Voos\n"
                             + "11 - Listar Voos por Data\n12 - Listar Voos do dia\n13 - Listar Voos do Passageiro" +
                             "\n14 - Listar os passageiros de um voo de acordo com o número do voo\n15 - Listar todos os aviões" +
-                            "\n17 - Listar todos os passageiros\n18 - Exportar Dados Avioes (tem que colocar dos Voos e passageiros)\n19 - Importar Dados Avioes", "Vá Com Deus", 3));
+                            "\n17 - Listar todos os passageiros\n18 - Exportar Dados Avioes (tem que colocar dos Voos e passageiros)\n19 - Importar Dados", "Vá Com Deus", 3));
 
             switch (opcao) {
                 case 1:
@@ -293,11 +301,6 @@ public class Principal {
                     break;
                 case 18:
                     Aeroporto.exportarDadosAvioes();
-                    break;
-
-                case 19:
-                    String nomeArq = JOptionPane.showInputDialog(null, "Digite o nome do arquivo");
-                    Aeroporto.importarDadosAviao(nomeArq);
 
                     break;
                 default:
