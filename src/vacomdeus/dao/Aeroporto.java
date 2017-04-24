@@ -15,8 +15,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 public class Aeroporto {
-
-    private static ArrayList<Aviao> avioes = new ArrayList<Aviao>();
+    public static ArrayList<Companhia> companhias = new ArrayList<Companhia>();
+    //private static ArrayList<Aviao> avioes = new ArrayList<Aviao>();/*APAGAR TALVEZ*/
     private static ArrayList<Passageiro> passageiros = new ArrayList<Passageiro>();
     private static ArrayList<Voo> voos = new ArrayList<Voo>();
 
@@ -51,57 +51,144 @@ public class Aeroporto {
 
     public static boolean validarEmail(String email) {
         if (email != null) {
-
-            //String nome = email.getNome();
-
             return email.matches("[a-zA-z]{1}+[a-zA-z0-9-_.]{0,}+[@]{1}+[A-Za-z0-9-]{1,}+"
                     + "(\\.[A-Za-z0-9]{1,}+)*(\\.[A-Za-z]{1,})$");
-
         }
         return false;
     }
 
 	/*AVIÃO*/
-    public static boolean cadastrarAviao(Aviao aviao) {
-        if ((aviao.getAltura() < 1) || (aviao.getId().equals(null)) || (aviao.getAutonomia() < 1) ||
+    public static boolean cadastrarAviao(Aviao aviao, String companhia) {
+        /*if ((aviao.getAltura() < 1) || (aviao.getId().equals(null)) || (aviao.getAutonomia() < 1) ||
                 (aviao.getCapacidadePassageiros() < 1) || (aviao.getComprimento() < 1) ||
                 (aviao.getTamanhoEnvergaduraAsa() < 1)) {
             return false;
+        }*/
+        if (!companhias.equals(null)) {
+            int id;
+            for (Companhia c : companhias) {
+                if (c.getNome().equals(companhia)) {
+                    id = companhias.indexOf(c);
+                    companhias.get(id).setNovoAviao(aviao);
+                }
+            }
         }
-        avioes.add(aviao);
+        //avioes.add(aviao);
         return true;
     }
 
-    public static boolean editaAviao(Aviao aviao) {
-        for (Aviao a : avioes) {
-            if (a.getId().equals(aviao.getId())) {
-                avioes.set(avioes.indexOf(a), aviao);
-                return true;
+    public static boolean editaAviao(Aviao aviao, String companhia) {
+        Companhia c = getCompanhia(companhia);
+        if (!c.avioes.equals(null)) {
+            int id = companhias.indexOf(c);
+            for (Aviao a : c.avioes) {
+                if (a.getId().equals(aviao.getId())) {
+                    companhias.get(id).avioes.set(id, aviao);
+                    return true;
+                }
             }
         }
         return false;
     }
 
-    public static boolean removeAviao(String id) {
-        if (existeIdAviao(id) == false) {
+    public static boolean removeAviao(String id, String companhia) {
+        if (existeIdAviao(id, companhia) == false) {
             return false;
         }
-        avioes.remove(getAviao(id));
+        Companhia c = getCompanhia(companhia);
+        companhias.get(companhias.indexOf(c)).avioes.remove(getAviao(id));
         return true;
     }
 
     public static void listarAvioes() {
         String aux = "";
-        if (avioes.size() > 0) {
-            for (Aviao a : avioes) {
-                aux = aux + a.toString();
-            }
-        } else {
+        if (companhias.equals(null)) {
             aux = "Não há nenhum avião cadastrado";
+        } else {
+            for (Companhia c : companhias) {
+                if (!c.avioes.equals(null)) {
+                    aux = aux + c.getNome() + "\n";
+                    for (Aviao a : c.avioes) {
+                        aux = aux + a.toString() + "\n";
+                    }
+                    aux = aux + "\n";
+                }
+            }
+            JOptionPane.showMessageDialog(null, aux, "Aviões Cadastrados", JOptionPane.INFORMATION_MESSAGE);
         }
-        JOptionPane.showMessageDialog(null, aux, "Aviões Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }
 
+    public static Aviao getAviao(String id) {
+        if (!companhias.equals(null))
+            for (Companhia c : companhias) {
+                if (!c.avioes.equals(null))
+                    for (Aviao a : c.avioes) {
+                        if (a.getId().equals(id))
+                            return a;
+                    }
+            }
+        return null;
+    }
+
+    public static boolean existeIdAviao(String id) {
+        if (!companhias.equals(null))
+            for (Companhia c : companhias) {
+                if (!c.avioes.equals(null))
+                    for (Aviao a : c.avioes) {
+                        if (a.getId().equals(id))
+                            return true;
+                    }
+            }
+        return false;
+    }
+
+    public static boolean existeIdAviao(String id, String companhia) {
+        Companhia c = getCompanhia(companhia);
+        if (!c.avioes.equals(null))
+            for (Aviao a : c.avioes) {
+                if (a.getId().equals(id))
+                    return true;
+            }
+        return false;
+    }
+
+    /*COMPANHIAS*/
+    public static Companhia getCompanhia(String nome) {
+        if (!companhias.equals(null)) {
+            for (Companhia c : companhias) {
+                if (c.getNome().equals(nome))
+                    return c;
+            }
+        }
+        return null;
+    }
+
+    public static boolean existeCompanhia(String nome) {
+        if (!companhias.equals(null)) {
+            for (Companhia c : companhias) {
+                if (c.getNome().equals(nome))
+                    return true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean cadastraCompanhia(String nome) {
+        if (nome != null) {
+            Companhia c = new Companhia(nome);
+            return companhias.add(c);
+        }
+        return false;
+    }
+
+    public static boolean removeCompanhia(String nome) {
+        if (!companhias.equals(null)) {
+            Companhia c = getCompanhia(nome);
+            c.avioes.removeAll(c.avioes);
+            return companhias.remove(c);
+        }
+        return false;
+    }
 
     /*PASSAGEIROS*/
     public static boolean cadastrarPassageiros(Passageiro passageiro) {
@@ -153,23 +240,43 @@ public class Aeroporto {
         return null;
     }
 
+    public static boolean existePassageiro(Passageiro passageiro) {
+        for (Passageiro p : passageiros) {
+            if (p.equals(passageiro)) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+   
     /*VOOS*/
-    public static boolean cadastrarVoos(Voo voo) {
-        if ((voo.getNumeroVoo() > 0) || voo.getCompanhiaAerea().equals(null) || voo.getDataHorario().equals(null) ||
-                voo.getDestino().equals(null) || voo.getOrigem().equals(null) || voo.getidAviao().equals(null) ||
-                voo.getStatusVoo().equals(null) || voo.getCarga() > 0) {
+    public static boolean cadastrarVoos(Voo voo, String companhia) {
+        if ((voo.getNumeroVoo() > 0) || voo.getDataHorario().equals(null) || voo.getDestino().equals(null) ||
+                voo.getOrigem().equals(null) || voo.getidAviao().equals(null) || voo.getStatusVoo().equals(null) ||
+                voo.getCarga() > 0) {
             if (voos.size() < 100) {
                 voos.add(voo);
+                if (!voo.getStatusVoo().equals(3)) {
+                    Companhia c = getCompanhia(companhia);
+                    int id = companhias.indexOf(c);
+                    companhias.get(id).setNumVoos(c.getNumVoos() + 1);
+                }
                 return true;
             }
         }
         return false;
     }
 
-    public static boolean editaVoo(Voo voo) {
+    public static boolean editaVoo(Voo voo, String companhia) {
         if (voos != null) {
             for (Voo v : voos) {
                 if (v.getidAviao().equals(voo.getidAviao())) {
+                    if ((v.getStatusVoo() != voo.getStatusVoo()) && voo.getStatusVoo().equals(3)) {
+                        Companhia c = getCompanhia(companhia);
+                        int id = companhias.indexOf(c);
+                        companhias.get(id).setNumVoos(c.getNumVoos() - 1);
+                    }
                     voos.set(voos.indexOf(v), voo);
                     return true;
                 }
@@ -178,11 +285,14 @@ public class Aeroporto {
         return false;
     }
 
-    public static boolean removeVoo(String id) {
+    public static boolean removeVoo(int num) {
         if (voos != null) {
             for (Voo v : voos) {
-                if (v.getidAviao().equals(id)) ;
+                if (v.getNumeroVoo() == num) ;
+                Companhia c = getCompanhia(v.getCompanhiaAerea());
                 voos.remove(v);
+                int id = companhias.indexOf(c);
+                companhias.get(id).setNumVoos(c.getNumVoos() - 1);
                 return true;
             }
         }
@@ -201,6 +311,15 @@ public class Aeroporto {
         JOptionPane.showMessageDialog(null, result, "Voos Cadastrados", JOptionPane.PLAIN_MESSAGE);
     }
 
+    public static boolean existeVoo(int numVoo) {
+        if (!voos.equals(null))
+            for (Voo v : voos) {
+                if (v.getNumeroVoo() == numVoo)
+                    return true;
+            }
+        return false;
+    }
+   
     /*LISTAR*/
     public static void listarVoosData(Date data) {
         String result = "";
@@ -229,7 +348,7 @@ public class Aeroporto {
 
     public static void listarPassageirosVoo(Voo voo) {
         String result = "";
-        if (existeIdVoo(voo.getNumeroVoo()) == false) {
+        if (existeVoo(voo.getNumeroVoo()) == false) {
             result = "Os passageiros não foram listados pois esse voo não existe";
         }
         for (Voo v : voos) {
@@ -240,50 +359,15 @@ public class Aeroporto {
         JOptionPane.showMessageDialog(null, result, "Passageiros do Voo", JOptionPane.PLAIN_MESSAGE);
     }
 
-    /*EXISTE*/
-    public static boolean existeIdAviao(String id) {
-        for (Aviao a : avioes) {
-            if (a.getId().equals(id)) {
-                return true;
+    public static String listarCompanhias() {
+        if (!companhias.equals(null)) {
+            String lista = "";
+            for (Companhia c : companhias) {
+                lista = lista + c.getNome() + "  ";
             }
+            return lista;
         }
-        return false;
-    }
-
-    public static boolean existeIdVoo(int id) {
-        for (Voo v : voos) {
-            if (v.getNumeroVoo() == (id)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean existeVoo(Voo voo) {
-        for (Voo v : voos) {
-            if (v.equals(voo)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean existeAviao(Aviao aviao) {
-        for (Aviao a : avioes) {
-            if (a.equals(aviao)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    public static boolean existePassageiro(Passageiro passageiro) {
-        for (Passageiro p : passageiros) {
-            if (p.equals(passageiro)) {
-                return true;
-            }
-        }
-        return false;
+        return null;
     }
 
 
@@ -296,27 +380,22 @@ public class Aeroporto {
         return date;
     }
 
-    public static Aviao getAviao(String id) {
-
-        for (Aviao a : avioes) {
-            if (a.getId().equals(id)) {
-                return a;
-            }
-        }
-        return null;
-    }
-
     public static boolean exportarDadosAvioes() {
         Gson gson = new Gson();
         try {
             //Escreve Json convertido em arquivo chamado "file.json"
             FileWriter writer = new FileWriter("file.json");
-            for (Aviao a : avioes) {
-                String aux = gson.toJson(a);
-                // System.out.println(aux);
-                writer.write(aux);
-                writer.write("\n");//Não sei se pode ter esse \n
-
+            if (!companhias.equals(null)) {
+                for (Companhia c : companhias) {
+                    if (!c.avioes.equals(null)) {
+                        for (Aviao a : c.avioes) {
+                            String aux = gson.toJson(a);
+                            // System.out.println(aux);
+                            writer.write(aux);
+                            writer.write("\n");//Não sei se pode ter esse \n
+                        }
+                    }
+                }
             }
             writer.close();
 
