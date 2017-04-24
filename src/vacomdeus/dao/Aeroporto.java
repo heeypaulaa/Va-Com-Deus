@@ -467,7 +467,7 @@ public class Aeroporto {
             while (linha != null) {
                 aviao = gson.fromJson(linha, Aviao.class);
                 System.out.printf(aviao.toString());
-                avioes.add(aviao);
+                //avioes.add(aviao);
 
                 linha = leitor.readLine(); // lê da segunda até a última linha
             }
