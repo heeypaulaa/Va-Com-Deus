@@ -457,14 +457,14 @@ public class Aeroporto {
     }
 
     public static String listarCompanhias() {
+        String lista = "";
         if (!companhias.isEmpty()) {
-            String lista = "";
             for (Companhia c : companhias) {
                 lista = lista + c.getNome() + "  ";
             }
             return lista;
         }
-        return null;
+        return lista;
     }
 
 
