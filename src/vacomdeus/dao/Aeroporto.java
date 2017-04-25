@@ -82,7 +82,7 @@ public class Aeroporto {
         return false;
     }
 
-	/*AVIÃO*/
+    /*AVIÃO*/
     public static boolean existeAviaoCadastrado() {
         if (companhias.size() == 0) {
             return false;
@@ -133,10 +133,13 @@ public class Aeroporto {
         Companhia c = getCompanhia(companhia);
         /*remove todos os voos deste avião*/
         if (!voos.isEmpty()) {
+            int tam = voos.size();
             for (Voo v : voos) {
                 if (v.getidAviao().equals(id)) {
                     removeVoo(v.getNumeroVoo());
                 }
+                if (tam == 1)
+                    break;
             }
         }
         return c.removeAviao(c.getAviao(id));
@@ -223,8 +226,13 @@ public class Aeroporto {
     public static boolean removeCompanhia(String nome) {
         if (!companhias.isEmpty()) {
             Companhia c = getCompanhia(nome);
-            for (Aviao a : c.getListAvioes()) {
-                removeAviao(a.getId(), nome);
+            if (!c.getListAvioes().isEmpty()) {
+                int tam = c.getListAvioes().size();
+                for (Aviao a : c.getListAvioes()) {
+                    removeAviao(a.getId(), nome);
+                    if (tam == 1)
+                        break;
+                }
             }
             return companhias.remove(c);
         }
@@ -255,10 +263,14 @@ public class Aeroporto {
 
     public static boolean removePassageiro(String cpf) {
         if (!passageiros.isEmpty()) {
+            int tam = passageiros.size();
             for (Passageiro p : passageiros) {
-                if (p.getCpf().equals(cpf))
+                if (p.getCpf().equals(cpf)) {
                     passageiros.remove(p);
-                return true;
+                    return true;
+                }
+                if (tam == 1)
+                    break;
             }
         }
         return false;
@@ -352,11 +364,13 @@ public class Aeroporto {
                 if (v.getNumeroVoo() == num) {
                     if (!passageiros.isEmpty()) {
                 /*roda a lista de Passageiros e remove todos que tem o mesmo numero de voo*/
+                        int tam = passageiros.size();
                         for (Passageiro p : passageiros) {
                             if (p.getNumeroVoo() == num) {
-
                                 removePassageiro(p.getCpf());
                             }
+                            if (tam == 1)
+                                break;
                         }
                     }
                 /*pega companhia para decrementar o numero de voos por companhia*/
@@ -393,6 +407,15 @@ public class Aeroporto {
         return false;
     }
 
+    public static Voo getVoo(int numVoo) {
+        if (!voos.isEmpty()) {
+            for (Voo v : voos) {
+                if (v.getNumeroVoo() == numVoo)
+                    return v;
+            }
+        }
+        return null;
+    }
 
     /*LISTAR*/
     public static void listarVoosData(Date data) {
@@ -439,14 +462,14 @@ public class Aeroporto {
     }
 
     public static String listarCompanhias() {
+        String lista = "";
         if (!companhias.isEmpty()) {
-            String lista = "";
             for (Companhia c : companhias) {
                 lista = lista + c.getNome() + "  ";
             }
             return lista;
         }
-        return null;
+        return lista;
     }
 
 

@@ -53,7 +53,7 @@ public class Companhia {
 
     public String toString() {
         String aux = getNome() + "\n";
-        if (!avioes.equals(null)) {
+        if (!avioes.isEmpty()) {
             for (Aviao a : avioes) {
                 aux = aux + a.toString() + "\n";
             }
