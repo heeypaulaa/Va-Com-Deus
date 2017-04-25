@@ -41,7 +41,7 @@ public class Voo {
     }
 
     public String getCompanhiaAerea() {
-        return companhiaAerea;
+        return this.companhiaAerea;
     }
 
     public void setCompanhiaAerea(String companhiaAerea) {
