@@ -23,6 +23,7 @@ public class Principal {
             id = JOptionPane.showInputDialog(null, "ID", "Cadastro Avião", 3);
         } while (Aeroporto.existeIdAviao(id, companhia));
         aviao.setId(id);
+        aviao.setCompanhia(companhia);
         aviao.setAltura(Double.parseDouble(JOptionPane.showInputDialog(null, "Altura em metros", "Cadastro Avião", 3)));
         aviao.setAutonomia(Double.parseDouble(JOptionPane.showInputDialog(null, "Autonomia em km", "Cadastro Avião", 3)));
         aviao.setComprimento(Double.parseDouble(JOptionPane.showInputDialog(null, "Comprimento em metros", "Cadastro Avião", 3)));
@@ -300,9 +301,14 @@ public class Principal {
                     Aeroporto.listarPassageiros();
                     break;
                 case 18:
-                    Aeroporto.exportarDadosAvioes();
+                    String nomeArq = JOptionPane.showInputDialog(null, "O nome do arquivo ");
+                    Aeroporto.exportarDadosAvioes(nomeArq);
 
                     break;
+                case 19:
+                    String nomeArqImportar = JOptionPane.showInputDialog(null, "O nome do arquivo ");
+                    Aeroporto.importarDadosAviao(nomeArqImportar);
+
                 default:
                     break;
             }

@@ -11,4 +11,5 @@ public enum StatusVoo {
     public int getStatus() {
         return status;
     }
+
 }

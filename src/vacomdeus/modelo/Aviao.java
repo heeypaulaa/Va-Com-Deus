@@ -9,9 +9,10 @@ public class Aviao {
     final Double capacidadeCarga = 30.0;
     private int capacidadePassageiros;
     private String id;
+    private String companhia;
 
     public Aviao(Double autonomia, Double altura, Double tamanhoEnvergaduraAsa, Double comprimento,
-                 int capacidadePassageiros, String id) {
+                 int capacidadePassageiros, String id, String companhia) {
         super();
         this.autonomia = autonomia;
         this.altura = altura;
@@ -19,6 +20,7 @@ public class Aviao {
         this.comprimento = comprimento;
         this.capacidadePassageiros = capacidadePassageiros;
         this.id = id;
+        this.companhia = companhia;
     }
 
     public Aviao() {
@@ -29,7 +31,7 @@ public class Aviao {
     public String toString() {
         return "ID: " + id + ", Autonomia: " + autonomia + ", altura:" + altura + ", Tamanho Envergadura da Asa:"
                 + tamanhoEnvergaduraAsa + ", comprimento:" + comprimento + ", Capacidade  de Carga:" + capacidadeCarga
-                + ", Capacidade Passageiros: " + capacidadePassageiros;
+                + ", Capacidade Passageiros: " + capacidadePassageiros + ", Companhia:" + companhia;
 
     }
 
@@ -79,6 +81,14 @@ public class Aviao {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getCompanhia() {
+        return companhia;
+    }
+
+    public void setCompanhia(String companhia) {
+        this.companhia = companhia;
     }
 
 }

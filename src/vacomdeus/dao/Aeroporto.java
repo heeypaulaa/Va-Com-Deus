@@ -115,7 +115,7 @@ public class Aeroporto {
         } else {
             for (Companhia c : companhias) {
                 if (!c.avioes.equals(null)) {
-                    aux = aux + c.getNome() + "\n";
+                    // aux = aux + c.getNome() + "\n";
                     for (Aviao a : c.avioes) {
                         aux = aux + a.toString() + "\n";
                     }
@@ -388,11 +388,11 @@ public class Aeroporto {
         return date;
     }
 
-    public static boolean exportarDadosAvioes() {
+    public static boolean exportarDadosAvioes(String nomeArq) {
         Gson gson = new Gson();
         try {
             //Escreve Json convertido em arquivo chamado "file.json"
-            FileWriter writer = new FileWriter("avioes.json");
+            FileWriter writer = new FileWriter(nomeArq);
             if (!companhias.equals(null)) {
                 for (Companhia c : companhias) {
                     if (!c.avioes.equals(null)) {
@@ -466,8 +466,11 @@ public class Aeroporto {
             //System.out.printf(aviao.toString());
             while (linha != null) {
                 aviao = gson.fromJson(linha, Aviao.class);
-                System.out.printf(aviao.toString());
+                //System.out.printf(aviao.toString());
                 //avioes.add(aviao);
+                Companhia c = getCompanhia(aviao.getCompanhia());
+                companhias.get(companhias.indexOf(c)).setNovoAviao(aviao);
+
 
                 linha = leitor.readLine(); // lê da segunda até a última linha
             }
