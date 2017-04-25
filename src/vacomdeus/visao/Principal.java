@@ -314,9 +314,17 @@ public class Principal {
                     Aeroporto.listarPassageiros();
                     break;
                 case 15:
-                    //menuListarVoosPassageiro();
+                    String cpfPassageiro = JOptionPane.showInputDialog(null, "Digite o CPF do passageiro: ");
+                    if (Aeroporto.validarCPF(cpfPassageiro) == false) {
+                        JOptionPane.showInputDialog(null, "CPF inválido");
+                    } else {
+                        Aeroporto.listarVoosPassageiro(cpfPassageiro);
+                    }
+
                     break;
                 case 16:
+                    int nVoo = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o numero do voo: "));
+                    Aeroporto.listarPassageirosVoo(nVoo);
 
                     break;
                 case 17:

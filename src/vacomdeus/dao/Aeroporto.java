@@ -410,27 +410,32 @@ public class Aeroporto {
         JOptionPane.showMessageDialog(null, result, "Voos Por Data", JOptionPane.PLAIN_MESSAGE);
     }
 
-    public static void listarVoosPassageiro(Passageiro passageiro) {
+    public static boolean listarVoosPassageiro(String cpf) {
         String result = "";
-        for (Passageiro p : passageiros) {
-            if (p.equals(passageiro)) {
-                result = result + voos.toString() + "\n";
+        for (Voo v : voos) {
+            for (Passageiro p : passageiros) {
+                if (p.getCpf().equals(cpf) && (p.getNumeroVoo() == v.getNumeroVoo())) {
+                    result = result + v.toString() + "\n";
+                }
             }
         }
         JOptionPane.showMessageDialog(null, result, "Voos por Passageiros", JOptionPane.PLAIN_MESSAGE);
+        return true;
     }
 
-    public static void listarPassageirosVoo(Voo voo) {
+    public static boolean listarPassageirosVoo(int nVoo) {
         String result = "";
-        if (existeVoo(voo.getNumeroVoo()) == false) {
+        if (existeVoo(nVoo) == false) {
             result = "Os passageiros não foram listados pois esse voo não existe";
         }
-        for (Voo v : voos) {
-            if (v.equals(voo)) {
-                result = result + passageiros.toString() + "\n";
+        for (Passageiro p : passageiros) {
+            if (p.getNumeroVoo() == nVoo) {
+                result = result + p.toString() + "\n";
             }
         }
+
         JOptionPane.showMessageDialog(null, result, "Passageiros do Voo", JOptionPane.PLAIN_MESSAGE);
+        return true;
     }
 
     public static String listarCompanhias() {
