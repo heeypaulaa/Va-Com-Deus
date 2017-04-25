@@ -36,14 +36,15 @@ public class Principal {
         }
     }
 
-    public static void menuRemoverAviao() {
+    public static void menuRemoverAviao() { /*passar para aeroporto*/
         String aux = Aeroporto.listarCompanhias();
         String companhia;
         do {
             companhia = JOptionPane.showInputDialog(null, "Companhias cadastradas: " + aux + "\nCompanhia do Avião a ser Excluído", "Excluir Avião", JOptionPane.QUESTION_MESSAGE);
         } while (!Aeroporto.existeCompanhia(companhia));
         String id = JOptionPane.showInputDialog(null, "ID do Avião a ser Excluído", "Excluir Avião", JOptionPane.QUESTION_MESSAGE);
-        if ((Aeroporto.removeAviao(id, companhia)) == true) {
+        Companhia c = Aeroporto.getCompanhia(companhia);
+        if (c.removeAviao(id) == true) {
             JOptionPane.showMessageDialog(null, "Avião removido com sucesso", "Excluir Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Avião não removido", "Excluir Avião", JOptionPane.ERROR_MESSAGE);
