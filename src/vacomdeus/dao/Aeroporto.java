@@ -28,6 +28,21 @@ public class Aeroporto {
     private static ArrayList<Passageiro> passageiros = new ArrayList<Passageiro>();
     private static ArrayList<Voo> voos = new ArrayList<Voo>();
 
+    public static boolean existeAviaoCadastrado() {
+        if (companhias.size() == 0) {
+            return false;
+        } else {
+            for (Companhia c : companhias) {
+                if (c.avioes.size() > 0) {
+                    return true;
+                }
+            }
+
+
+        }
+        return false;
+    }
+
     public static Date StringToDateHour(String data) {  /*muda string para date*/
         Date date = null;
         try {
@@ -110,7 +125,7 @@ public class Aeroporto {
 
     public static void listarAvioes() {
         String aux = "";
-        if (companhias.equals(null)) {
+        if ((companhias.size() == 0) || companhias.equals(null)) {
             aux = "Não há nenhum avião cadastrado";
         } else {
             for (Companhia c : companhias) {
@@ -121,9 +136,11 @@ public class Aeroporto {
                     }
                     aux = aux + "\n";
                 }
+
             }
-            JOptionPane.showMessageDialog(null, aux, "Aviões Cadastrados", JOptionPane.INFORMATION_MESSAGE);
+
         }
+        JOptionPane.showMessageDialog(null, aux, "Aviões Cadastrados", JOptionPane.INFORMATION_MESSAGE);
     }
 
     public static Aviao getAviao(String id) {
@@ -279,7 +296,7 @@ public class Aeroporto {
     public static boolean editaVoo(Voo voo, String companhia) {
         if (voos != null) {
             for (Voo v : voos) {
-                if (v.getidAviao().equals(voo.getidAviao())) {
+                if (v.getidAviao().equals(voo.getidAviao()) && (v.getCompanhiaAerea().equals(companhia))) {
                     if ((v.getStatusVoo() != voo.getStatusVoo()) && voo.getStatusVoo().equals(3)) {
                         Companhia c = getCompanhia(companhia);
                         int id = companhias.indexOf(c);
@@ -292,6 +309,18 @@ public class Aeroporto {
         }
         return false;
     }
+
+    public static boolean exiteVooCompanhia(int numeroVoo, String nomecompanhia) {
+        if (voos != null) {
+            for (Voo v : voos) {
+                if (v.getCompanhiaAerea().equals(nomecompanhia) && v.getNumeroVoo() == numeroVoo) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
 
     public static boolean removeVoo(int num) {
         if (voos != null) {

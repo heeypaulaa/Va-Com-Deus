@@ -29,9 +29,9 @@ public class Aviao {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Autonomia: " + autonomia + ", altura:" + altura + ", Tamanho Envergadura da Asa:"
-                + tamanhoEnvergaduraAsa + ", comprimento:" + comprimento + ", Capacidade  de Carga:" + capacidadeCarga
-                + ", Capacidade Passageiros: " + capacidadePassageiros + ", Companhia:" + companhia;
+        return "ID:" + id + ", Companhia:" + companhia + ",  Autonomia:" + autonomia + ",  Altura:" + altura + ",  Tamanho envergadura das asas:"
+                + tamanhoEnvergaduraAsa + ",  Comprimento:" + comprimento + ",  Capacidade  de carga:" + capacidadeCarga
+                + ",  Capacidade passageiros: " + capacidadePassageiros;
 
     }
 

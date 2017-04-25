@@ -99,9 +99,9 @@ public class Voo {
     @Override
     public String toString() {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
-        return "Número do Voo: " + numeroVoo + " Companhia Aérea: " + companhiaAerea + " Avião: " + idAviao
-                + " Data e Horário: " + sdf.format(dataHorario) + " Status Voo: " + statusVoo + " Destino: "
-                + destino + " Origem: " + origem + " Carga: " + carga;
+        return "Número do Voo:" + numeroVoo + ",  Companhia Aérea: " + companhiaAerea + ",  ID Avião:" + idAviao
+                + ",  Data e Horário:" + sdf.format(dataHorario) + ",  Status Voo:" + statusVoo + ",  Destino:"
+                + destino + ",  Origem: " + origem + ",  Carga: " + carga;
     }
 
 
