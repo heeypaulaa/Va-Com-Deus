@@ -28,21 +28,6 @@ public class Aeroporto {
     private static ArrayList<Passageiro> passageiros = new ArrayList<Passageiro>();
     private static ArrayList<Voo> voos = new ArrayList<Voo>();
 
-    public static boolean existeAviaoCadastrado() {
-        if (companhias.size() == 0) {
-            return false;
-        } else {
-            for (Companhia c : companhias) {
-                if (c.getListAvioes().size() > 0) {
-                    return true;
-                }
-            }
-
-
-        }
-        return false;
-    }
-
     public static Date StringToDateHour(String data) {  /*muda string para date*/
         Date date = null;
         try {
@@ -81,7 +66,7 @@ public class Aeroporto {
     }
 
     public static boolean limpaAeroporto() {
-        if (!companhias.equals(null)) {
+        if (!companhias.isEmpty()) {
             for (Companhia c : companhias) {
                 removeCompanhia(c.getNome());
             }
@@ -91,8 +76,23 @@ public class Aeroporto {
     }
 
 	/*AVIÃO*/
+    public static boolean existeAviaoCadastrado() {
+        if (companhias.size() == 0) {
+            return false;
+        } else {
+            for (Companhia c : companhias) {
+                if (c.getListAvioes().size() > 0) {
+                    return true;
+                }
+            }
+
+
+        }
+        return false;
+    }
+
     public static boolean cadastrarAviao(Aviao aviao, String companhia) {
-        if (!companhias.equals(null)) {
+        if (!companhias.isEmpty()) {
             int id;
             for (Companhia c : companhias) {
                 if (c.getNome().equals(companhia)) {
@@ -106,7 +106,7 @@ public class Aeroporto {
 
     public static boolean editaAviao(Aviao aviao, String companhia) {/*arrumar depois*/
         Companhia c = getCompanhia(companhia);
-        if (!c.getListAvioes().equals(null)) {
+        if (!c.getListAvioes().isEmpty()) {
             int id = companhias.indexOf(c);
             for (Aviao a : c.getListAvioes()) {
                 if (a.getId().equals(aviao.getId())) {
@@ -124,9 +124,12 @@ public class Aeroporto {
         }
         Companhia c = getCompanhia(companhia);
         /*remove todos os voos deste avião*/
-        for (Voo v : voos) {
-            if (v.getidAviao().equals(id))
-                removeVoo(v.getNumeroVoo());
+        if (!voos.isEmpty()) {
+            for (Voo v : voos) {
+                if (v.getidAviao().equals(id)) {
+                    removeVoo(v.getNumeroVoo());
+                }
+            }
         }
         return c.removeAviao(c.getAviao(id));
     }
@@ -137,7 +140,7 @@ public class Aeroporto {
             aux = "Não há nenhum avião cadastrado neste Aeroporto";
         } else {
             for (Companhia c : companhias) {
-                 aux = c.toString() ;
+                aux = aux + c.toString();
             }
 
         }
@@ -159,9 +162,9 @@ public class Aeroporto {
     }*/
 
     public static boolean existeIdAviao(String id) {
-        if (!companhias.equals(null))
+        if (!companhias.isEmpty())
             for (Companhia c : companhias) {
-                if (!c.getListAvioes().equals(null))
+                if (!c.getListAvioes().isEmpty())
                     for (Aviao a : c.getListAvioes()) {
                         if (a.getId().equals(id))
                             return true;
@@ -172,7 +175,7 @@ public class Aeroporto {
 
     public static boolean existeIdAviao(String id, String companhia) {
         Companhia c = getCompanhia(companhia);
-        if (!c.getListAvioes().equals(null))
+        if (!c.getListAvioes().isEmpty())
             for (Aviao a : c.getListAvioes()) {
                 if (a.getId().equals(id))
                     return true;
@@ -182,7 +185,7 @@ public class Aeroporto {
 
     /*COMPANHIAS*/
     public static Companhia getCompanhia(String nome) {
-        if (!companhias.equals(null)) {
+        if (!companhias.isEmpty()) {
             for (Companhia c : companhias) {
                 if (c.getNome().equals(nome))
                     return c;
@@ -192,7 +195,7 @@ public class Aeroporto {
     }
 
     public static boolean existeCompanhia(String nome) {
-        if (!companhias.equals(null)) {
+        if (!companhias.isEmpty()) {
             for (Companhia c : companhias) {
                 if (c.getNome().equals(nome))
                     return true;
@@ -210,7 +213,7 @@ public class Aeroporto {
     }
 
     public static boolean removeCompanhia(String nome) {
-        if (!companhias.equals(null)) {
+        if (!companhias.isEmpty()) {
             Companhia c = getCompanhia(nome);
             for (Aviao a : c.getListAvioes()) {
                 removeAviao(a.getId(), nome);
@@ -231,7 +234,7 @@ public class Aeroporto {
     }
 
     public static boolean editaPassageiro(Passageiro passageiro) {
-        if (passageiros != null) {
+        if (!passageiros.isEmpty()) {
             for (Passageiro p : passageiros) {
                 if (p.getCpf().equals(passageiro.getCpf())) {
                     passageiros.set(passageiros.indexOf(p), passageiro);
@@ -243,7 +246,7 @@ public class Aeroporto {
     }
 
     public static boolean removePassageiro(String cpf) {
-        if (passageiros != null) {
+        if (!passageiros.isEmpty()) {
             for (Passageiro p : passageiros) {
                 if (p.getCpf().equals(cpf))
                     passageiros.remove(p);
@@ -260,7 +263,7 @@ public class Aeroporto {
     }
 
     public static Passageiro getPassageiro(String cpf) {
-        if (passageiros != null) {
+        if (!passageiros.isEmpty()) {
             for (Passageiro p : passageiros) {
                 if (p.getCpf().equals(cpf)) {
                     return p;
@@ -299,7 +302,7 @@ public class Aeroporto {
     }
 
     public static boolean editaVoo(Voo voo, String companhia) {
-        if (voos != null) {
+        if (!voos.isEmpty()) {
             for (Voo v : voos) {
                 if (v.getidAviao().equals(voo.getidAviao()) && (v.getCompanhiaAerea().equals(companhia))) {
                     if ((v.getStatusVoo() != voo.getStatusVoo()) && voo.getStatusVoo().equals(3)) {
@@ -316,7 +319,7 @@ public class Aeroporto {
     }
 
     public static boolean exiteVooCompanhia(int numeroVoo, String nomecompanhia) {
-        if (voos != null) {
+        if (!voos.isEmpty()) {
             for (Voo v : voos) {
                 if (v.getCompanhiaAerea().equals(nomecompanhia) && v.getNumeroVoo() == numeroVoo) {
                     return true;
@@ -327,22 +330,27 @@ public class Aeroporto {
     }
 
 
-    public static boolean removeVoo(int num) {/*arrumado*/
-        if (voos != null) {
+    public static boolean removeVoo(int num) {/**/
+        if (!voos.isEmpty()) {
             for (Voo v : voos) {
-                if (v.getNumeroVoo() == num) ;
+                if (v.getNumeroVoo() == num) {
+                    if (!passageiros.isEmpty()) {
                 /*roda a lista de Passageiros e remove todos que tem o mesmo numero de voo*/
-                for (Passageiro p : passageiros) {
-                    if (p.getNumeroVoo() == num) {
-                        removePassageiro(p.getCpf());
+                        for (Passageiro p : passageiros) {
+                            if (p.getNumeroVoo() == num) {
+
+                                removePassageiro(p.getCpf());
+                            }
+                        }
                     }
-                }
                 /*pega companhia para decrementar o numero de voos por companhia*/
-                Companhia c = getCompanhia(v.getCompanhiaAerea());
-                int id = companhias.indexOf(c);
-                companhias.get(id).setNumVoos(c.getNumVoos() - 1);
-                voos.remove(v);
-                return true;
+                    String s = v.getCompanhiaAerea();
+                    Companhia c = getCompanhia(s);
+                    int id = companhias.indexOf(c);
+                    companhias.get(id).setNumVoos(c.getNumVoos() - 1);
+                    voos.remove(v);
+                    return true;
+                }
             }
         }
         return false;
@@ -361,7 +369,7 @@ public class Aeroporto {
     }
 
     public static boolean existeVoo(int numVoo) {
-        if (!voos.equals(null))
+        if (!voos.isEmpty())
             for (Voo v : voos) {
                 if (v.getNumeroVoo() == numVoo)
                     return true;
@@ -410,7 +418,7 @@ public class Aeroporto {
     }
 
     public static String listarCompanhias() {
-        if (!companhias.equals(null)) {
+        if (!companhias.isEmpty()) {
             String lista = "";
             for (Companhia c : companhias) {
                 lista = lista + c.getNome() + "  ";
@@ -435,9 +443,9 @@ public class Aeroporto {
         try {
             //Escreve Json convertido em arquivo chamado "file.json"
             FileWriter writer = new FileWriter(nomeArq);
-            if (!companhias.equals(null)) {
+            if (!companhias.isEmpty()) {
                 for (Companhia c : companhias) {
-                    if (!c.getListAvioes().equals(null)) {
+                    if (!c.getListAvioes().isEmpty()) {
                         for (Aviao a : c.getListAvioes()) {
                             String aux = gson.toJson(a);
                             // System.out.println(aux);

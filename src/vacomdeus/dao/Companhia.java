@@ -48,7 +48,7 @@ public class Companhia {
 
     public boolean removeAviao(Aviao a) {
         avioes.remove(a);
-        return false;
+        return true;
     }
 
     public String toString() {
