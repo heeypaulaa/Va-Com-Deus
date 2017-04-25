@@ -44,7 +44,7 @@ public class Principal {
         } while (!Aeroporto.existeCompanhia(companhia));
         String id = JOptionPane.showInputDialog(null, "ID do Avião a ser Excluído", "Excluir Avião", JOptionPane.QUESTION_MESSAGE);
         Companhia c = Aeroporto.getCompanhia(companhia);
-        if (c.removeAviao(id) == true) {
+        if (Aeroporto.removeAviao(id, companhia) == true) {
             JOptionPane.showMessageDialog(null, "Avião removido com sucesso", "Excluir Avião", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(null, "Erro - Avião não removido", "Excluir Avião", JOptionPane.ERROR_MESSAGE);
@@ -259,7 +259,7 @@ public class Principal {
                             + "7 - Remover Voo\n8 - Listar todos Voos\n9 - Listar Voos por data\n10 - Listar Voos de hoje\n\n"
                             + "11 - Cadastrar Passageiro\n12 - Editar Passageiro\n13 - Remover Passageiro" +
                             "\n14 - Listar todos os passageiros\n15 - Listar todos os voos do passageiro" +
-                            "\n16 - Listar passageiros do voo\n18 - Exportar Dados Avioes (tem que colocar dos Voos e passageiros)\n19 - Importar Dados", "Vá Com Deus", 3));
+                            "\n16 - Listar passageiros do voo\n\n18 - Exportar Dados Avioes (tem que colocar dos Voos e passageiros)\n19 - Importar Dados", "Vá Com Deus", 3));
 
             switch (opcao) {
                 case 1:

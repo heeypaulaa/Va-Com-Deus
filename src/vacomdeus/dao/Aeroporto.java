@@ -33,7 +33,7 @@ public class Aeroporto {
             return false;
         } else {
             for (Companhia c : companhias) {
-                if (c.avioes.size() > 0) {
+                if (c.getListAvioes().size() > 0) {
                     return true;
                 }
             }
