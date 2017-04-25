@@ -75,8 +75,8 @@ public class Passageiro {
 
     @Override
     public String toString() {
-        return "Passageiro [nome=" + nome + ", telefone=" + telefone + ", email=" + email + ", cpf=" + cpf
-                + ", dataNascimento=" + dataNascimento + ", numeroVoo=" + numeroVoo + "]";
+        return "Nome:" + nome + ", numeroVoo=" + numeroVoo + ", Telefone=" + telefone + ", Email=" + email + ", Cpf=" + cpf
+                + ", Data de Nascimento=" + dataNascimento;
     }
 
 

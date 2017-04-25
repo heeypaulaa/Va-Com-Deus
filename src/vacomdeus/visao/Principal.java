@@ -189,7 +189,11 @@ public class Principal {
             email = JOptionPane.showInputDialog(null, "Email:", "Cadastro Passageiro", 3);
         } while (Aeroporto.validarEmail(email) == false);
         passageiro.setEmail(email);
-        passageiro.setTelefone(JOptionPane.showInputDialog(null, "Telefone:", "Cadastro Passageiro", 3));
+        String telefone;
+        do {
+            telefone = JOptionPane.showInputDialog(null, "Telefone (XXX)XXXX-XXXX:", "Cadastro Passageiro", 3);
+        } while (Aeroporto.validarTelefone(telefone) == false);
+        passageiro.setTelefone(telefone);
         int numeroVoo;
         do {
             numeroVoo = Integer.parseInt(JOptionPane.showInputDialog(null, "Número do Voo:", "Cadastro Passageiro", 3));
@@ -235,14 +239,14 @@ public class Principal {
         } while (Aeroporto.validarCPF(cpf) == false);
         passageiro.setCpf(cpf);
         passageiro = Aeroporto.getPassageiro(cpf);
-        passageiro.setNome(JOptionPane.showInputDialog(null, passageiro.getNome(), "Editar Passageiro", 3));
+        passageiro.setNome(JOptionPane.showInputDialog(null, "Digite o nome atual", "Editar Passageiro", 3));
         String email;
         do {
-            email = JOptionPane.showInputDialog(null, passageiro.getEmail(), "Editar Passageiro", 3);
+            email = JOptionPane.showInputDialog(null, "Digite o email atual", "Editar Passageiro", 3);
         } while (Aeroporto.validarEmail(email) == false);
         passageiro.setEmail(email);
-        passageiro.setTelefone(JOptionPane.showInputDialog(null, passageiro.getTelefone(), "Editar Passageiro", 3));
-        passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, passageiro.getNumeroVoo(), "Remover Passageiro", 3)));
+        passageiro.setTelefone(JOptionPane.showInputDialog(null, "Digite o telefone atual (XXX)XXXX-XXXX", "Editar Passageiro", 3));
+        passageiro.setNumeroVoo(Integer.parseInt(JOptionPane.showInputDialog(null, "Digite o número do voo", "Remover Passageiro", 3)));
         if ((Aeroporto.editaPassageiro(passageiro)) == true) {
             JOptionPane.showMessageDialog(null, "Passageiro editado com sucesso", "Editar Passageiro", JOptionPane.INFORMATION_MESSAGE);
         } else {
@@ -259,7 +263,10 @@ public class Principal {
                             + "7 - Remover Voo\n8 - Listar todos Voos\n9 - Listar Voos por data\n10 - Listar Voos de hoje\n\n"
                             + "11 - Cadastrar Passageiro\n12 - Editar Passageiro\n13 - Remover Passageiro" +
                             "\n14 - Listar todos os passageiros\n15 - Listar todos os voos do passageiro" +
-                            "\n16 - Listar passageiros do voo\n\n18 - Exportar Dados Avioes (tem que colocar dos Voos e passageiros)\n19 - Importar Dados", "Vá Com Deus", 3));
+                            "\n16 - Listar passageiros do voo\n\n17 - Exportar dados Avioes " +
+                            "\n18 - Exportar dados Voos" + "\n19 - Exportar dados Passageiros" +
+                            "\n20 - Importar dados Avioes" + "\n21 - Importar dados Voos" +
+                            "\n22 - Importar dados Passageiros" + "\n\n23 - Reiniciar dados Aeroporto", "Vá Com Deus", 3));
 
             switch (opcao) {
                 case 1:
@@ -302,29 +309,68 @@ public class Principal {
                     break;
                 case 13:
                     menuRemoverPassageiro();
-                    //menuListarVoosPassageiro();
                     break;
                 case 14:
                     Aeroporto.listarPassageiros();
                     break;
                 case 15:
-
+                    //menuListarVoosPassageiro();
                     break;
                 case 16:
 
                     break;
+                case 17:
+                    String nomeArquivoExportarAvioes = JOptionPane.showInputDialog(null, "O nome do arquivo ");
+                    if (Aeroporto.exportarDadosAvioes(nomeArquivoExportarAvioes) == false) {
+                        JOptionPane.showMessageDialog(null, "Erro ao exportar avioes");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Aviões exportados com sucesso");
+                    }
+                    break;
                 case 18:
-                    String nomeArq = JOptionPane.showInputDialog(null, "O nome do arquivo ");
-                    Aeroporto.exportarDadosAvioes(nomeArq);
-
+                    String nomeArquivoExportarVoos = JOptionPane.showInputDialog(null, "O nome do arquivo ");
+                    if (Aeroporto.exportarDadosVoos(nomeArquivoExportarVoos) == false) {
+                        JOptionPane.showMessageDialog(null, "Erro ao exportar voos");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Voos exportados com sucesso");
+                    }
                     break;
                 case 19:
-                    String nomeArqImportar = JOptionPane.showInputDialog(null, "O nome do arquivo ");
-                    Aeroporto.importarDadosAviao(nomeArqImportar);
+                    String nomeArquivoExportarPassageiros = JOptionPane.showInputDialog(null, "O nome do arquivo ");
+                    if (Aeroporto.exportarDadosPassageiros(nomeArquivoExportarPassageiros) == false) {
+                        JOptionPane.showMessageDialog(null, "Erro ao exportar passageiros");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Passageiros exportados com sucesso");
+                    }
+                    break;
+                case 20:
+                    String nomeArqImportarAvioes = JOptionPane.showInputDialog(null, "O nome do arquivo ");
+                    if (Aeroporto.importarDadosAviao(nomeArqImportarAvioes) == false) {
+                        JOptionPane.showMessageDialog(null, "Erro ao importar avioes");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Avioes importados com sucesso");
+                    }
+                    break;
+                case 21:
+                    String nomeArqImportarVoos = JOptionPane.showInputDialog(null, "O nome do arquivo ");
+                    if (Aeroporto.importarDadosVoo(nomeArqImportarVoos) == false) {
+                        JOptionPane.showMessageDialog(null, "Erro ao importar voos");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Voos importados com sucesso");
+                    }
+                    break;
+                case 22:
+                    String nomeArqImportarPassageiros = JOptionPane.showInputDialog(null, "O nome do arquivo ");
+                    if (Aeroporto.importarDadosPassageiro(nomeArqImportarPassageiros) == false) {
+                        JOptionPane.showMessageDialog(null, "Erro ao importar passageiros");
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Passageiros importados com sucesso");
+                    }
+                    break;
 
                 default:
                     break;
             }
-        } while (opcao <= 20);
+        } while (opcao <= 25);
     }
 }

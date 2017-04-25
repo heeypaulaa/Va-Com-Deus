@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import vacomdeus.modelo.*;
 
 import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -72,6 +73,12 @@ public class Aeroporto {
         return false;
     }
 
+    public static boolean validarTelefone(String telefone) {
+        if (telefone != null) {
+            return telefone.matches("[(]{1}+[0-9]{3}+[)]{1}+[0-9]{4}+[-]{1}+[0-9]{4}");
+        }
+        return false;
+    }
     public static boolean validarEmail(String email) {
         if (email != null) {
             return email.matches("[a-zA-z]{1}+[a-zA-z0-9-_.]{0,}+[@]{1}+[A-Za-z0-9-]{1,}+"
@@ -98,10 +105,11 @@ public class Aeroporto {
                 if (c.getNome().equals(companhia)) {
                     id = companhias.indexOf(c);
                     companhias.get(id).setNovoAviao(aviao);
+                    return true;
                 }
             }
         }
-        return true;
+        return false;
     }
 
     public static boolean editaAviao(Aviao aviao, String companhia) {/*arrumar depois*/
@@ -137,7 +145,7 @@ public class Aeroporto {
             aux = "Não há nenhum avião cadastrado neste Aeroporto";
         } else {
             for (Companhia c : companhias) {
-                 aux = c.toString() ;
+                aux = aux + c.toString();
             }
 
         }
@@ -254,10 +262,18 @@ public class Aeroporto {
     }
 
     public static void listarPassageiros() {
-        for (Passageiro p : passageiros) {
-            System.out.println(p.toString());
+        String aux = "";
+        if (passageiros.size() == 0) {
+            aux = "Nenhum passageiro Cadastrado";
+        } else {
+            for (Passageiro p : passageiros) {
+                aux = aux + p.toString() + "\n";
+                //System.out.println(p.toString());
+            }
         }
+        JOptionPane.showMessageDialog(null, aux, "Passageiros Cadastrados", JOptionPane.PLAIN_MESSAGE);
     }
+
 
     public static Passageiro getPassageiro(String cpf) {
         if (passageiros != null) {
@@ -455,11 +471,11 @@ public class Aeroporto {
         return true;
     }
 
-    public static boolean exportarDadosVoos() {
+    public static boolean exportarDadosVoos(String nomeArq) {
         Gson gson = new Gson();
         try {
             //Escreve Json convertido em arquivo chamado "file.json"
-            FileWriter writer = new FileWriter("voos.json");
+            FileWriter writer = new FileWriter(nomeArq);
             for (Voo v : voos) {
                 String aux = gson.toJson(v);
                 // System.out.println(aux);
@@ -475,10 +491,10 @@ public class Aeroporto {
         return true;
     }
 
-    public static boolean exportarDadosPassageiros() {
+    public static boolean exportarDadosPassageiros(String nomeArq) {
         Gson gson = new Gson();
         try {
-            FileWriter writer = new FileWriter("passageiros.json");
+            FileWriter writer = new FileWriter(nomeArq);
             for (Passageiro p : passageiros) {
                 String aux = gson.toJson(p);
                 // System.out.println(aux);
@@ -503,15 +519,22 @@ public class Aeroporto {
             BufferedReader leitor = new BufferedReader(reader);
 
             String linha = leitor.readLine(); // lê a primeira linha
-            aviao = gson.fromJson(linha, Aviao.class);
+            //aviao = gson.fromJson(linha, Aviao.class);
             //avioes.add(aviao);
             //System.out.printf(aviao.toString());
             while (linha != null) {
                 aviao = gson.fromJson(linha, Aviao.class);
                 //System.out.printf(aviao.toString());
                 //avioes.add(aviao);
-                Companhia c = getCompanhia(aviao.getCompanhia());
-                companhias.get(companhias.indexOf(c)).setNovoAviao(aviao);
+                // System.out.println(aviao.toString());
+                if (Aeroporto.existeCompanhia(aviao.getCompanhia()) == false) {
+                    Aeroporto.cadastraCompanhia(aviao.getCompanhia());
+                    // JOptionPane.showMessageDialog(null, "Avião não cadastrado pois não existe esta companhia");
+                }
+                Aeroporto.cadastrarAviao(aviao, aviao.getCompanhia());
+                //Companhia c = getCompanhia(aviao.getCompanhia());
+                //System.out.println(c.getNome());
+                //companhias.get(companhias.indexOf(c)).setNovoAviao(aviao);
 
 
                 linha = leitor.readLine(); // lê da segunda até a última linha
@@ -519,8 +542,7 @@ public class Aeroporto {
 
             leitor.close();
         } catch (IOException e) {
-            System.err.printf("Erro na abertura do arquivo: %s.\n",
-                    e.getMessage());
+            return false;
         }
 
 
@@ -546,8 +568,7 @@ public class Aeroporto {
 
             leitor.close();
         } catch (IOException e) {
-            System.err.printf("Erro na abertura do arquivo: %s.\n",
-                    e.getMessage());
+            return false;
         }
         return true;
 
@@ -572,8 +593,7 @@ public class Aeroporto {
 
             leitor.close();
         } catch (IOException e) {
-            System.err.printf("Erro na abertura do arquivo: %s.\n",
-                    e.getMessage());
+            return false;
         }
         return true;
 
