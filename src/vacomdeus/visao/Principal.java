@@ -375,6 +375,9 @@ public class Principal {
                         JOptionPane.showMessageDialog(null, "Passageiros importados com sucesso");
                     }
                     break;
+                case 23:
+                    Aeroporto.limpaAeroporto();
+                    break;
 
                 default:
                     break;

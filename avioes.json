@@ -1,0 +1,20 @@
+{
+  "autonomia": 1.0,
+  "altura": 1.0,
+  "tamanhoEnvergaduraAsa": 1.0,
+  "comprimento": 1.0,
+  "capacidadeCarga": 30.0,
+  "capacidadePassageiros": 1,
+  "id": "1",
+  "companhia": "tam"
+}
+{
+  "autonomia": 2.0,
+  "altura": 2.0,
+  "tamanhoEnvergaduraAsa": 2.0,
+  "comprimento": 2.0,
+  "capacidadeCarga": 30.0,
+  "capacidadePassageiros": 2,
+  "id": "2",
+  "companhia": "gol"
+}
